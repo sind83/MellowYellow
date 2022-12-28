@@ -15,3 +15,11 @@ $colors: (
 }
 
 // for example background-color: getColor("main-color");
+
+$fonts: (
+  'main-font': 'Roboto',
+);
+
+@function getFont($key) {
+  @return map-get($fonts, $key);
+}
