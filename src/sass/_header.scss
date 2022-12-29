@@ -1,0 +1,32 @@
+.hero-header {
+  padding-top: 46px;
+  padding-bottom: 43px;
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation {
+  list-style-type: none;
+  display: flex;
+  gap: 39px;
+  padding-top: 12px;
+}
+
+.navigation__link {
+  text-decoration: none;
+
+  &.navigation__link::after {
+    width: 100%;
+  }
+
+  &::after {
+    content: '';
+    height: 3px;
+    position: absolute;
+    top: 72px;
+    right: 0;
+    border-radius: 2px;
+    background: #ff6b01;
+    //   background: getColor("brand-color");
+  }
+}
