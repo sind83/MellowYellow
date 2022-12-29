@@ -1,1 +1,25 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.button {
+  border-radius: 5px;
+  padding-top: 14px;
+  padding-bottom: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+
+  &--active {
+    border: none;
+    background-color: #ff6b01;
+  }
+
+  &--inactive {
+    background-color: transparent;
+    border: 1px solid #fff;
+  }
+}
