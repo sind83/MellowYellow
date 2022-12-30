@@ -1,4 +1,4 @@
-const gallery = document.querySelector('.gallery');
+const gallery = document.querySelector('.film-cards');
 function renderMovies({ page, results }) {
   const markup = results
     .map(({ poster_path, title, genres, vote_average, release_date, id }) => {
