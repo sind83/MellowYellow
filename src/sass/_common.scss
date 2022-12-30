@@ -1,1 +1,65 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
+
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.body {
+  margin: auto;
+}
+
+.container {
+  min-width: 320px;
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0px 20px;
+}
+
+.film-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 0 75px;
+  }
+
+  .film-cards {
+    gap: 30px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    padding: 0px 71px;
+  }
+}
+
+.button {
+  border-radius: 5px;
+  padding-top: 14px;
+  padding-bottom: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  color: getColor('basic-color');
+
+  &--active {
+    border: none;
+    background-color: getColor('button-color');
+  }
+
+  &--inactive {
+    background-color: transparent;
+    border: 1px solid getColor('basic-color');
+  }
+}
