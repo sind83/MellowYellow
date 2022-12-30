@@ -1,32 +1,62 @@
+.header-div {
+  background-image: url(../images/home_mobile_opt.jpg);
+  background-size: cover;
+}
+
 .hero-header {
   padding-top: 46px;
   padding-bottom: 43px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 41px;
+}
+
+.hero-header__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 112px;
+}
+
+.logo__link {
+  text-decoration: none;
+}
+
+.logo__icon {
+  fill: gray;
 }
 
 .navigation {
   list-style-type: none;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 39px;
   padding-top: 12px;
 }
 
+.navigation__item {
+  position: relative;
+}
+
 .navigation__link {
   text-decoration: none;
+  text-transform: uppercase;
+  font-family: getFont('main-font');
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.17;
+  color: getColor('basic-color');
+  text-align: center;
 
-  &.navigation__link::after {
-    width: 100%;
-  }
-
-  &::after {
+  &--underlined::after {
     content: '';
+    width: 100%;
     height: 3px;
     position: absolute;
-    top: 72px;
+    top: 35px;
     right: 0;
     border-radius: 2px;
-    background: #ff6b01;
-    //   background: getColor("brand-color");
+    background-color: getColor('button-color');
   }
 }
