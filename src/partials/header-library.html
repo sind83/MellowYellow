@@ -1,33 +1,32 @@
 <header>
-  <div class="container">
-    <div id="library" class="hero-header">
-      <div class="hero-header__top">
-        <a class="logo" href="index.html">
-          <!-- <img
-            class="logo__img"
-            alt="Filmoteka logo"
-            src="./images/header/logo/logo.png"
-            srcset="./images/header/logo/logo@2x.png 2x"
-          /> -->
-        </a>
-        <nav>
-          <ul class="navigation">
-            <li>
-              <a class="navigation__link" href="index.html">Home</a>
-            </li>
-            <li>
-              <a
-                class="navigation__link navigation__link--underlined"
-                href="library.html"
-                >My library</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div class="hero-header__buttons">
-        <button class="button button--active" type="button">Watched</button>
-        <button class="button button--inactive" type="button">Queue</button>
+  <div class="header-div">
+    <div class="container">
+      <div id="library" class="hero-header">
+        <div class="hero-header__top">
+          <a class="logo" href="index.html">
+            <svg class="logo__icon" width="24" height="24">
+              <use href="./images/icons_optimalised.svg#icon-film"></use>
+            </svg>
+          </a>
+          <nav>
+            <ul class="navigation">
+              <li class="navigation__item">
+                <a class="navigation__link" href="index.html">Home</a>
+              </li>
+              <li class="navigation__item">
+                <a
+                  class="navigation__link navigation__link--underlined"
+                  href="library.html"
+                  >My library</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div class="hero-header__buttons">
+          <button class="button button--active" type="button">Watched</button>
+          <button class="button button--inactive" type="button">Queue</button>
+        </div>
       </div>
     </div>
   </div>
