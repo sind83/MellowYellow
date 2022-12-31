@@ -1,8 +1,10 @@
 const gallery = document.querySelector('.film-cards');
-function renderMovies({ page, results }) {
+
+export function renderMovies(page, results=[]) {
+  console.log("wnetrze", results);
   const markup = results
-    .map(({ poster_path, title, genres, vote_average, release_date, id }) => {
-      const genre = genres.map(genre => genres.name).join(',');
+    .map(({ poster_path, title, genre_ids, vote_average, release_date, id })=> {
+      const genre = genre_ids.map(genre => genre_ids).join(',');
       const releaseYear = release_date.slice(0, 4);
       return `<div class='movie-card'>
           <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
@@ -15,7 +17,8 @@ function renderMovies({ page, results }) {
     .join('');
   gallery.insertAdjacentHTML('afterbegin', markup);
 }
-function renderModalMovie({ page, results }) {
+
+export function renderModalMovie({ page, results }) {
   const markup = results
     .map(
       ({
