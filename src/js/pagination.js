@@ -12,7 +12,7 @@ export const pagination = (total_pages = 1, pageNo = 1) => {
     }
     else {
         let initI = 0 + pageNo;
-        paginationPlace.innerHTML += `<button class = "pagination_icon__left" type="button"></button>`;
+        paginationPlace.innerHTML += `<button class = "pagination_icon left" type="button"></button>`;
         for (let i = initI; i < initI + 8; i++) {
 
             if ((i == 1 + pageNo) || (i == 6 + pageNo)) {
@@ -22,6 +22,6 @@ export const pagination = (total_pages = 1, pageNo = 1) => {
                 paginationPlace.innerHTML += `<button class="pagination_number" type="button">${i}</button>`
             }
         }
-        paginationPlace.innerHTML += `<button class = "pagination_icon__right" type="button"></button>`
+        paginationPlace.innerHTML += `<button class = "pagination_icon right" type="button"></button>`
     }
 }
