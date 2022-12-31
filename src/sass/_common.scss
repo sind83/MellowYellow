@@ -46,11 +46,17 @@ ul {
 }
 
 .button {
+  width: 100%;
   border-radius: 5px;
   padding-top: 14px;
   padding-bottom: 12px;
   text-align: center;
   text-transform: uppercase;
+  cursor: pointer;
+  font-family: getFont('main-font');
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
   color: getColor('basic-color');
 
   &--active {
