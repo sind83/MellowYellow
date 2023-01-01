@@ -1,6 +1,7 @@
 export const gallery = document.querySelector('.film-cards');
 
-export function renderMovies(page, results=[]) {
+export function renderMovies(page, results = []) {
+  gallery.innerHTML = '';
   const markup = results
     .map(({ poster_path, title, genre_ids, vote_average, release_date, id })=> {
       const genre = genre_ids.map(genre => genre_ids).join(',');

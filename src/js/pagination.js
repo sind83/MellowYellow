@@ -1,27 +1,32 @@
 //import {gallery} from'./cards_rendering';
 
-const paginationPlace = document.querySelector('.film-cards__pagination');
-const leftArrow = `<svg class="pagination_icon" width=40px height=40px ><use href="./images/icons_optimalised.svg#icon-arrow-left2"</use></svg>`
+export const paginationPlace = document.querySelector('.film-cards__pagination');
+
 const dots = `. . .`;
+
 export const pagination = (total_pages = 1, pageNo = 1) => {
     pagination.innerHTML = '';
+    paginationPlace.innerHTML += `<div value="arrow_l" class = "pagination__arrow left pagination__button"></div>`;
+    paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`;
     if ((total_pages <= 9) && (total_pages >= 2)) {
         for (let i = 0; i < total_pages; i++) {
-            paginationPlace.innerHTML += `<button type="button">${i + 1}</button>`
+            paginationPlace.innerHTML += `<div value="page" class="pagination__number pagination__button">${i + 1}</div>`
         }
     }
     else {
         let initI = 0 + pageNo;
-        paginationPlace.innerHTML += `<button class = "pagination_icon left" type="button"></button>`;
-        for (let i = initI; i < initI + 8; i++) {
 
-            if ((i == 1 + pageNo) || (i == 6 + pageNo)) {
-                paginationPlace.innerHTML += `<button class = "pagination_icon" type="button">${dots}</button>`
+        for (let i = initI; i < initI + 7; i++) {
+
+            if ((i ==  pageNo) || (i == 6 + pageNo)) {
+                paginationPlace.innerHTML += `<div value ="dots" class = "pagination__button" >${dots}</div>`
             }
             else {
-                paginationPlace.innerHTML += `<button class="pagination_number" type="button">${i}</button>`
+                paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
             }
         }
-        paginationPlace.innerHTML += `<button class = "pagination_icon right" type="button"></button>`
+
     }
+    paginationPlace.innerHTML += `<div value="page" class="pagination__button">${total_pages}</div>`;
+    paginationPlace.innerHTML += `<div value="arrow_r" class = "pagination__arrow right pagination__button"></div>`
 }
