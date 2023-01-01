@@ -17,7 +17,7 @@ $colors: (
 // for example background-color: getColor("main-color");
 
 $fonts: (
-  'main-font': 'Roboto',
+  'main-font': "Roboto"
 );
 
 @function getFont($key) {
