@@ -108,26 +108,31 @@ const paginatinSequence = paginationPlace.addEventListener("click", ev => {
             }
         }
         if (valueTemp == 'arrow_r') {
-            prevPage = parseInt(pagBtn.previousElementSibling.textContent);
-            pageNum = prevPage;
-            paginationPlace.innerHTML = '';
+            if (pageNum.toString() == 'NaN') {
+                pageNum = 1;
+            }
+            pageNum += 1;
+            console.log("Czy to jest Nan:", pageNum)
+            
             if (pageNum > allPages) {
                 page(allPages - 5, true);
             } else {
+                paginationPlace.innerHTML = '';
                 page(pageNum, true);
             }
         }
         if (valueTemp == 'arrow_l') {
-            console.log("next: ", pagBtn.nextElementSibling.textContent);
-            nextPage = parseInt(pagBtn.nextElementSibling.textContent);
-            pageNum = nextPage - 6;
+         if (pageNum.toString() == 'NaN'){
+            pageNum=1;
+         }
             paginationPlace.innerHTML = '';
             if (pageNum < 5) {
                 page(1, true);
             } else {
-                page(pageNum, true);
+                page(pageNum-1, true);
             }
         }
     }
+    console.log("akutalna strona: ", pageNum);
 })
 
