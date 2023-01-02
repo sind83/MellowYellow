@@ -1,5 +1,5 @@
 //import {gallery} from'./cards_rendering';
-import { renderMovies, rerenderModalMovie } from './cards_rendering.js';
+import { renderMovies, renderModalMovie } from './cards_rendering.js';
 
 import { popularMovies } from './main_fetch';
 
