@@ -1,24 +1,32 @@
+import { popularMovies } from './main_fetch';
+
 export const gallery = document.querySelector('.film-cards');
 
-export function renderMovies(page, results = []) {
+export function renderMovies(page, results = [], genres) {
   gallery.innerHTML = '';
   const markup = results
-    .map(({ poster_path, title, genre_ids, vote_average, release_date, id })=> {
-      const genre = genre_ids.map(genre => genre_ids).join(',');
-      const releaseYear = release_date.slice(0, 4);
-      return `<div class='movie-card'>
+    .map(
+      ({ poster_path, title, genre_ids, vote_average, release_date, id }) => {
+        const genresNames = genres.map(genre => genre.name);
+        // const genresNames = genres.forEach(function (genre) {
+        //   genres.map(genre => genre.name);
+        // });
+        const genreNames = genresNames.slice(0, 2).join(', ');
+        const releaseYear = release_date.slice(0, 4);
+        return `<div class='movie-card'>
           <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
   <div class='movie-card__info'>
    <p class='info__title'>${title}</p>
-   <p class='info__adds'>${genre}|${releaseYear}</p>
+   <p class='info__adds'>${genreNames} | ${releaseYear}</p>
    <p class='info__adds info__adds--vote'>${vote_average}</p>   
         </div></div>`;
-    })
+      }
+    )
     .join('');
   gallery.insertAdjacentHTML('afterbegin', markup);
 }
 
-export function renderModalMovie({ page, results }) {
+export function renderModalMovie(page, results = []) {
   const markup = results
     .map(
       ({
