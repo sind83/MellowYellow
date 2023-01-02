@@ -9,9 +9,16 @@
   &__image {
     max-width: 280px;
     margin-bottom: 10px;
+    border-radius: 5px;
+    overflow: hidden;
     &--modal {
       max-width: 240px;
     }
+  }
+  &__info {
+    line-height: 1.33;
+    font-size: 12px;
+    margin-bottom: 20px;
   }
   &__info--modal {
     padding: 30px 0px;
@@ -72,6 +79,9 @@
       &--modal {
         max-width: 264px;
       }
+    }
+    &__info {
+      margin-bottom: 0px;
     }
     &__info--modal {
       padding: 0px 0px 0px 32px;

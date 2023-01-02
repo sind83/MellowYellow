@@ -1,0 +1,40 @@
+.film-cards__pagination{
+    display: flex;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 60px;
+    align-items: center;
+    justify-content: center;
+}
+.pagination{
+    &__arrow{
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-color: getColor('second-background');
+    background-position: 50%;
+}
+    
+    &__button{
+        border-radius: 5px;
+        padding-top: 14px;
+        font-size: 12px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        &--number {
+                padding-top: 14px;
+                
+                background-color: red;//transparent;
+
+            }
+        
+        }
+}
+
+.left{
+        background-image: url("../images/left-arrow.svg");
+        
+    }
+.right {
+             background-image: url("../images/right_arrow.svg");
+         }
