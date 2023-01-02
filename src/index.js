@@ -1,7 +1,7 @@
 import { renderMovies, renderModalMovie } from './js/cards_rendering.js';
 
-import { popularMovies } from './js/main_fetch';
-import { pagination, paginationPlace } from './js/pagination.js';
+// import { popularMovies } from './js/main_fetch';
+// import { pagination, paginationPlace } from './js/pagination.js';
 
 let pageForURL = '';
 
