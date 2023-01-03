@@ -1,0 +1,27 @@
+$colors: (
+  'main-color': #000000,
+  'second-main': #ff6b08,
+  'basic-color': #ffffff,
+  'background': #e5e5e5,
+  'second-background': #f7f7f7,
+  'error-color': #ff001b,
+  'button-color': #ff6b01,
+  'additional-color': #8c8c8c,
+  'copyright-info': #545454,
+);
+$kolorB:#ababff;
+$selected-button:1;
+
+@function getColor($key) {
+  @return map-get($colors, $key);
+}
+
+// for example background-color: getColor("main-color");
+
+$fonts: (
+  'main-font': "Roboto"
+);
+
+@function getFont($key) {
+  @return map-get($fonts, $key);
+}
