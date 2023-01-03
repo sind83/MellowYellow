@@ -7,11 +7,14 @@ export function renderMovies(page, results = [], genres) {
   const markup = results
     .map(
       ({ poster_path, title, genre_ids, vote_average, release_date, id }) => {
+      //  console.log("Genres",genres);
         const genresNames = genres.map(genre => genre.name);
         // const genresNames = genres.forEach(function (genre) {
         //   genres.map(genre => genre.name);
         // });
+        // console.log(genresNames);
         const genreNames = genresNames.slice(0, 2).join(', ');
+        // console.log(genresNames);
         const releaseYear = release_date.slice(0, 4);
         return `<div class='movie-card'>
           <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
