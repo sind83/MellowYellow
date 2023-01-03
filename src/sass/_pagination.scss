@@ -12,23 +12,23 @@
     background-color: transparent;
     background-color: getColor('second-background');
     background-position: 50%;
-}
-    
+    }
     &__button{
         border-radius: 5px;
         padding-top: 14px;
         font-size: 12px;
-        cursor: pointer;
         width: 40px;
         height: 40px;
-        &--number {
-                padding-top: 14px;
-                
-                background-color: red;//transparent;
-
-            }
-        
+        &:hover{
+            cursor: pointer;
+            background-color: aquamarine;
         }
+        // &:nth-child(){
+        //     background-color: $kolorB;
+        //     // background-color: getColor('button-color');
+        // }
+       
+    }
 }
 
 .left{
@@ -38,3 +38,6 @@
 .right {
              background-image: url("../images/right_arrow.svg");
          }
+.selected{
+    background-color: getColor('button-color');
+}
