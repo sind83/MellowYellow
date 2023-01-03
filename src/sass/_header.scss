@@ -63,6 +63,8 @@
 
 .logo__link {
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .logo__icon {
@@ -75,14 +77,13 @@
 
 @media screen and (min-width: 768px) {
   .logo__link {
-    display: flex;
     justify-content: space-between;
     gap: 10px;
   }
 
   .logo__text {
     display: block;
-    font-family: getFont("main-font");
+    font-family: getFont('main-font');
     font-weight: 500;
     font-size: 30px;
     line-height: 1.17;
@@ -122,7 +123,6 @@
     position: absolute;
     top: 18px;
     right: 0;
-    border-radius: 2px;
     background-color: getColor('button-color');
   }
 }
@@ -175,6 +175,7 @@
 .search-button {
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .search-form__icon {
