@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 .footer {
     text-align: center;
     background-color: #f7f7f7;
@@ -19,3 +20,26 @@
     text-decoration: underline;
     color: #545454;
 }
+=======
+.footer {
+    text-align: center;
+    background-color: getColor('second-background');
+    width: 100%;
+    padding: 30px;
+    font-family: getFont('main-font');
+
+    color: getColor('copyright-info');
+    font-size: 16px;
+    line-height: 1.19;
+}
+
+.footer__icon_logo {
+    animation: heartbeat 1250ms cubic-bezier(.25, .1, .25, 1) infinite;
+}
+
+
+.footer a {
+    text-decoration: underline;
+    color: getColor('copyright-info');
+}
+>>>>>>> Stashed changes
