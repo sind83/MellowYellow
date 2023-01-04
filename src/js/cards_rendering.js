@@ -32,7 +32,7 @@ export function renderMovies(page, results = [], genres) {
   gallery.insertAdjacentHTML('afterbegin', markup);
 }
 
-export function renderModalMovie(page, results = []) {
+export function renderModalMovie(page, results = [], genres) {
   const markup = results
     .map(
       ({
