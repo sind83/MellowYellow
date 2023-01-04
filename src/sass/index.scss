@@ -1,7 +1,8 @@
-@import './utils/variables.scss';
-@import "./pagination";
+@import './utils/variables';
+@import './pagination';
 @import './common';
 @import './header';
 @import './main';
+@import './loader-spinner';
 @import './movie-cards';
 @import './footer';

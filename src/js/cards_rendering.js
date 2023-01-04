@@ -7,17 +7,23 @@ export function renderMovies(page, results = [], genres) {
   const markup = results
     .map(
       ({ poster_path, title, genre_ids, vote_average, release_date, id }) => {
-        const genresNames = genres.map(genre => genre.name);
-        // const genresNames = genres.forEach(function (genre) {
-        //   genres.map(genre => genre.name);
-        // });
-        const genreNames = genresNames.slice(0, 2).join(', ');
+        const genresId = genres.map(genre => genre.id);
+        const genreNames = genres.map(genre => genre.name);
+        const genresNames = [];
+        genre_ids.forEach(id => {
+          genresNames.push(genresId.indexOf(id));
+          console.log('index:', genresNames);
+          return genresNames;
+        });
+        const namesOfGenre = `${genreNames[genresNames[0]]}, ${
+          genreNames[genresNames[1]]
+        }, ${genreNames[genresNames[2]]}`;
         const releaseYear = release_date.slice(0, 4);
         return `<div class='movie-card'>
           <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
   <div class='movie-card__info'>
    <p class='info__title'>${title}</p>
-   <p class='info__adds'>${genreNames} | ${releaseYear}</p>
+   <p class='info__adds'>${namesOfGenre} | ${releaseYear}</p>
    <p class='info__adds info__adds--vote'>${vote_average}</p>   
         </div></div>`;
       }
@@ -26,7 +32,7 @@ export function renderMovies(page, results = [], genres) {
   gallery.insertAdjacentHTML('afterbegin', markup);
 }
 
-export function renderModalMovie(page, results = []) {
+export function renderModalMovie(page, results = [], genres) {
   const markup = results
     .map(
       ({
@@ -40,7 +46,17 @@ export function renderModalMovie(page, results = []) {
         overview,
         id,
       }) => {
-        const genre = genres.map(genre => genres.name).join(',');
+        const genresId = genres.map(genre => genre.id);
+        const genreNames = genres.map(genre => genre.name);
+        const genresNames = [];
+        genre_ids.forEach(id => {
+          genresNames.push(genresId.indexOf(id));
+          console.log('index:', genresNames);
+          return genresNames;
+        });
+        const namesOfGenre = `${genreNames[genresNames[0]]}, ${
+          genreNames[genresNames[1]]
+        }, ${genreNames[genresNames[2]]}`;
         return `<div class='movie-card movie-card--modal'>
           <img class='movie-card__image--modal' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
   <div class='movie-card__info movie-card__info--modal'>
@@ -53,7 +69,7 @@ export function renderModalMovie(page, results = []) {
    <p class='adds__value'> <span class='library'> ${vote_average}</span> / ${vote_count}</p>
    <p class='adds__value'> ${popularity}</p>
    <p class='adds__value adds__value--title'> ${original_title}</p>
-   <p class='adds__value'> ${genre}</p></div>
+   <p class='adds__value'> ${namesOfGenre}</p></div>
    <p class='adds__about'><span class='adds__value--title'>About</span> ${overview}</p>
   <div class='adds__buttons>
    <button class='button button--inactive' type='button'>Add to watched</button>
