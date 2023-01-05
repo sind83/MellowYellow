@@ -28,7 +28,7 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
 
                 for (let i = initI; i < initI + 6; i++) {
                     if ((i == initI)) {
-                        if (pageNo > 4) {
+                        if (pageNo > 3) {
                             paginationPlace.innerHTML += `<div value ="dots_l" class = "pagination__button" >${dots}</div>`
                         }
                     }
