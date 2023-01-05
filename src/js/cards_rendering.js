@@ -12,12 +12,22 @@ export function renderMovies(page, results = [], genres) {
         const genresNames = [];
         genre_ids.forEach(id => {
           genresNames.push(genresId.indexOf(id));
-          console.log('index:', genresNames);
           return genresNames;
         });
-        const namesOfGenre = `${genreNames[genresNames[0]]}, ${
-          genreNames[genresNames[1]]
-        }, ${genreNames[genresNames[2]]}`;
+        const namesOfGenre = genresNames
+          .map(idik => genreNames[idik])
+          .slice(0, 3)
+          .join(', ');
+
+        // const genresArray = {};
+        // genres.forEach(genre => {
+        //   genresArray[genre.id] = genre.name;
+        // });
+        // const genreName = [];
+        // genre_ids.forEach(genreId => {
+        //   genreName.push(genresArray[genreId]);
+        // });
+        // const namesOfGenre = genreName.slice(0, 3).join(', ');
         const releaseYear = release_date.slice(0, 4);
         return `<div class='movie-card' data-movieId='${id}'>
           <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
@@ -54,9 +64,10 @@ export function renderModalMovie(page, results = [], genres) {
           console.log('index:', genresNames);
           return genresNames;
         });
-        const namesOfGenre = `${genreNames[genresNames[0]]}, ${
-          genreNames[genresNames[1]]
-        }, ${genreNames[genresNames[2]]}`;
+        const namesOfGenre = genresNames
+          .map(idik => genreNames[idik])
+          .slice(0, 3)
+          .join(', ');
         return `<div class='movie-card movie-card--modal' data-movieId='${id}'>
           <img class='movie-card__image--modal' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
   <div class='movie-card__info movie-card__info--modal'>
