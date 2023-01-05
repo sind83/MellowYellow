@@ -19,7 +19,7 @@ export function renderMovies(page, results = [], genres) {
           genreNames[genresNames[1]]
         }, ${genreNames[genresNames[2]]}`;
         const releaseYear = release_date.slice(0, 4);
-        return `<div class='movie-card'>
+        return `<div class='movie-card' data-movieId='${id}'>
           <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
   <div class='movie-card__info'>
    <p class='info__title'>${title}</p>
@@ -57,7 +57,7 @@ export function renderModalMovie(page, results = [], genres) {
         const namesOfGenre = `${genreNames[genresNames[0]]}, ${
           genreNames[genresNames[1]]
         }, ${genreNames[genresNames[2]]}`;
-        return `<div class='movie-card movie-card--modal'>
+        return `<div class='movie-card movie-card--modal' data-movieId='${id}'>
           <img class='movie-card__image--modal' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
   <div class='movie-card__info movie-card__info--modal'>
    <p class='info--modal__title'>${title}</p>
@@ -72,8 +72,8 @@ export function renderModalMovie(page, results = [], genres) {
    <p class='adds__value'> ${namesOfGenre}</p></div>
    <p class='adds__about'><span class='adds__value--title'>About</span> ${overview}</p>
   <div class='adds__buttons>
-   <button class='button button--inactive' type='button'>Add to watched</button>
-   <button class='button button--inactive' type='button'>Add to queue</button>     
+   <button class='button button--inactive button--watched' type='button'>Add to watched</button>
+   <button class='button button--inactive button--queue' type='button'>Add to queue</button>     
         </div></div></div></div>`;
       }
     )
