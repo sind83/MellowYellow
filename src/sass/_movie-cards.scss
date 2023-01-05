@@ -19,6 +19,8 @@
     line-height: 1.33;
     font-size: 12px;
     margin-bottom: 20px;
+    max-width: 280px;
+    overflow: hidden;
   }
   &__info--modal {
     padding: 30px 0px;
@@ -29,7 +31,7 @@
     text-transform: uppercase;
     font-weight: 500;
     line-height: 1.33;
-    overflow: hidden;
+    white-space: nowrap;
   }
   &__adds {
     display: inline;
@@ -83,6 +85,7 @@
     }
     &__info {
       margin-bottom: 0px;
+      max-width: 294px;
     }
     &__info--modal {
       padding: 0px 0px 0px 32px;
@@ -102,6 +105,9 @@
       &--modal {
         max-width: 396px;
       }
+    }
+    &__info {
+      max-width: 274px;
     }
     &__info--modal {
       padding: 0px 0px 0px 30px;
