@@ -13,8 +13,9 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
     if ((total_pages >= 2)) {
         if (pageNo != 1) {
             paginationPlace.innerHTML += `<div value="arrow_l" class = "pagination__arrow left pagination__button"></div>`;
-
-            paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`;
+            if (pageNo != 3) {
+                paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`;
+            }
         }
         if ((total_pages <= 9) && (total_pages >= 2)) {
             for (let i = 0; i < total_pages; i++) {
@@ -24,9 +25,10 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
         else {
             let initI = 0 + pageNo;
             if (arrowClicked) {
+
                 for (let i = initI; i < initI + 6; i++) {
                     if ((i == initI)) {
-                        if (pageNo != 1) {
+                        if (pageNo > 4) {
                             paginationPlace.innerHTML += `<div value ="dots_l" class = "pagination__button" >${dots}</div>`
                         }
                     }
@@ -41,7 +43,8 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
                                 paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
                                 break;
                             case 2:
-                                paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 1}</div>`
+                            case 1:
+                                paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
                                 break;
                             default:
                                 paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 2}</div>`
@@ -51,7 +54,7 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
             } else {
                 for (let i = initI; i < initI + 6; i++) {
                     if ((i == initI)) {
-                        if (pageNo != 1) {
+                        if (pageNo > 5) {
                             paginationPlace.innerHTML += `<div value ="dots_l" class = "pagination__button" >${dots}</div>`
                         }
                     }
@@ -85,6 +88,7 @@ let allPages = 1;
 const page = (pageNo = 1, renderOk = true, arrowClicked = false) => {
     popularMovies(pageNo)
         .then(elem => {
+
             const movies = elem.movies.results;
             const totalPages = elem.movies.total_pages;
             allPages = totalPages;
@@ -98,7 +102,7 @@ const page = (pageNo = 1, renderOk = true, arrowClicked = false) => {
                 }
             }
             renderMovies(0, movies, genresIds);
-         
+
 
         }).catch(console.warn);
 }
@@ -106,17 +110,23 @@ page(allPages, true);
 let pageActualNum = 1;
 
 paginationPlace.addEventListener("click", ev => {
-   
+    const clearFocus = () => {
+        let table = [...paginationPlace.children]
+        table.map((elem) => {
+            elem.classList.remove("selected");
+        })
+    }
     let prevPage = 0;
     let nextPage = 0;
     const pagBtn = ev.target;
     let pageNum = parseInt(pagBtn.textContent);
-    let arrowClicked = false
+    //let arrowClicked = false
 
     const valueTemp = pagBtn.getAttribute('value');
-    
+    console.log("ILOŚĆ DZIECI: ", paginationPlace.children.length);
     if (valueTemp == 'page') {
-        console.log("page", pagBtn.textContent);
+        //console.log("page", pagBtn.textContent);
+        let buttonNo = parseInt(pagBtn.textContent);
         if ((pageNum == 1) || (pageNum == allPages)) {
             paginationPlace.innerHTML = '';
             page(pageNum, true);
@@ -125,23 +135,29 @@ paginationPlace.addEventListener("click", ev => {
             page(pageNum, false);
         }
         pageActualNum = pageNum;
-        // paginationPlace.children
-        //     .classList.remove("selected");
-        //paginationPlace.children[pageNum - 1].classList.add("selected");
+        clearFocus();
+        const focusSelectedBtn = (buttonNo % 6);
+        console.log("Button Selected", focusSelectedBtn);
+        paginationPlace.children[focusSelectedBtn].classList.add("selected");
         
         // pageForURL = `&page=${pageNum}`
     }
     else {
         if (valueTemp == 'dots_r') {
-
+            clearFocus();
             prevPage = parseInt(pagBtn.previousElementSibling.textContent);
             pageNum = prevPage + 1;
             paginationPlace.innerHTML = '';
+            console.log("DOTSSSS R page number: ", pageNum);
             if (pageNum >= allPages) {
                 page(allPages - 4, true);
+                
             } else {
                 page(pageNum, true);
+                
             }
+
+            
             pageActualNum = pageNum;
         }
         if (valueTemp == 'dots_l') {
@@ -163,10 +179,15 @@ paginationPlace.addEventListener("click", ev => {
             console.log("Czy to jest Nan:", pageNum)
             arrowClicked = true;
             if (pageNum > allPages) {
-                page(allPages - 5, false, arrowClicked);
-            } else {
                 paginationPlace.innerHTML = '';
-                page(pageNum, true, arrowClicked);
+                page(allPages - 5, true, true);
+            }
+            if (pageNum < 4) {
+                page(pageNum, false, true);
+            }
+            else {
+                paginationPlace.innerHTML = '';
+                page(pageNum, true, true);
             }
             arrowClicked = false;
 
@@ -176,13 +197,13 @@ paginationPlace.addEventListener("click", ev => {
             pageNum = pageActualNum;
             console.log("Czy to jest Nan:", pageNum)
             paginationPlace.innerHTML = '';
-            arrowClicked = true;
-            if (pageNum < 2) {
-                page(1, true, arrowClicked);
+            //arrowClicked = true;
+            if (pageNum > 1) {
+                page(pageNum, true, true);
             } else {
-                page(pageNum, true, arrowClicked);
+                page(1, true, true);
             }
-            arrowClicked = false;
+            //arrowClicked = false;
 
         }
     }
