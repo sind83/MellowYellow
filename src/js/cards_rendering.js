@@ -43,12 +43,15 @@ export function renderMovies(page, results = [], genres) {
         //       )
         //       genreNames = gen.join(", ");
         //     });
+        const dots = '...';
+        const cuttedTitle = title.slice(0, 35) + dots;
+        const homePageTitle = title.length >= 40 ? cuttedTitle : title;
 
         const releaseYear = release_date.slice(0, 4);
         return `<div class='movie-card' data-movieId='${id}'>
           <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
   <div class='movie-card__info'>
-   <p class='info__title'>${title}</p>
+   <p class='info__title'>${homePageTitle}</p>
    <p class='info__adds'>${namesOfGenre} | ${releaseYear}</p>
    <p class='info__adds info__adds--vote'>${vote_average}</p>   
         </div></div>`;
