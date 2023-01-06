@@ -28,7 +28,8 @@ const warningMarkup = message => {
   }
   warning.classList.add('warning');
   warning.textContent = message;
-  form.after(warning);
+    form.after(warning);
+    return warning;
 };
 
 export const searchMovie = searchValue => {
