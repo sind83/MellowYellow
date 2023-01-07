@@ -21,7 +21,7 @@
         height: 40px;
         &:hover{
             cursor: pointer;
-            background-color: aquamarine;
+            background-color: getColor('second-background');
         }
         // &:nth-child(){
         //     background-color: $kolorB;
