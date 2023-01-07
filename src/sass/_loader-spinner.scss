@@ -1,0 +1,50 @@
+.loader-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+}
+
+.loader {
+  background-color: getColor('button-color');
+  padding: 0.8rem;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  position: relative;
+}
+.loader:after {
+  content: '';
+  position: absolute;
+  background-color: getColor('button-color');
+  opacity: 70%;
+  width: 5rem;
+  height: 5rem;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 1s ease-out infinite;
+}
+.loader__img {
+  width: 100%;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 100%;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  5% {
+    opacity: 90%;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+  100% {
+    opacity: 0;
+    width: 8rem;
+    height: 8rem;
+  }
+}
