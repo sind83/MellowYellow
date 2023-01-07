@@ -9,6 +9,8 @@ $colors: (
   'additional-color': #8c8c8c,
   'copyright-info': #545454,
 );
+$kolorB:#ababff;
+$selected-button:1;
 
 @function getColor($key) {
   @return map-get($colors, $key);
