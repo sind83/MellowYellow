@@ -64,6 +64,14 @@ ul {
   .container {
     padding: 0px 71px;
   }
+
+  .film-cards {
+    justify-content: flex-start;
+
+    &--loader {
+      justify-content: center;
+    }
+  }
 }
 
 .button {
