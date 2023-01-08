@@ -46,9 +46,12 @@ export function renderMovies(page, results = [], genres) {
         const dots = '...';
         const cuttedTitle = title.slice(0, 35) + dots;
         const homePageTitle = title.length >= 40 ? cuttedTitle : title;
-
-        const releaseYear = release_date.slice(0, 4);
-        return `<div class='movie-card' data-movieId='${id}'>
+        let releaseYear = 'unknown'
+        if (release_date) {
+          releaseYear = release_date.slice(0, 4);
+        }
+          return `<div class='movie-card' data-movieId='${id}'>
+        
           <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
   <div class='movie-card__info'>
    <p class='info__title'>${homePageTitle}</p>

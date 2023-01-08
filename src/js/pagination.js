@@ -1,6 +1,7 @@
 //import {gallery} from'./cards_rendering';
 import { renderMovies } from './cards_rendering.js';
 import { popularMovies } from './main_fetch';
+import { searchBtnClicked, input, searchMovie, searchValue, searchFetch, searchAllPages } from './movie_search.js';
 
 export const paginationPlace = document.querySelector('.film-cards__pagination');
 
@@ -16,7 +17,7 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
             }
         }
         if ((total_pages <= 8) && (total_pages >= 2)) {
-            for (let i = 1; i < total_pages - 1; i++) {
+            for (let i = 0; i < total_pages - 1; i++) {
                 paginationPlace.innerHTML += `<div value="page" class="pagination__number pagination__button">${i + 1}</div>`
             }
         }
@@ -79,7 +80,7 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
 
 let allPages = 1;
 let setSelect = false;
-let pageActualNum = 1;
+export let pageActualNum = 1;
 
 export const selectBtn = (colect, btnNumber) => {
     let val;
@@ -105,8 +106,9 @@ export const clearFocus = () => {
     })
 }
 
-export const page = (fetchFunc, pageNo = 1, renderOk = true, arrowClicked = false) => {
-    fetchFunc(pageNo)
+
+export const page = (fetchFunc, pageNo=1, renderOk = true, arrowClicked = false, searchVal ='') => {
+    fetchFunc(pageNo, searchVal)
         .then(elem => {
             const movies = elem.movies.results;
             const totalPages = elem.movies.total_pages;
@@ -127,7 +129,7 @@ export const page = (fetchFunc, pageNo = 1, renderOk = true, arrowClicked = fals
 }
 page(popularMovies, allPages, true);
 
-export const paginationRender = (ev, mainCallback, fetchCallback) => {
+export const paginationRender = (ev, mainCallback, fetchCallback, pages) => {
     //ev - event, mainCallback-function doing read, fetchcallback - func geting fetch from url
     let prevPage = 0;
     let nextPage = 0;
@@ -137,12 +139,25 @@ export const paginationRender = (ev, mainCallback, fetchCallback) => {
 
     const valueTemp = pagBtn.getAttribute('value');
     if (valueTemp == 'page') {
+        console.log("sssssERERERBTN: ", searchBtnClicked)
+        if (searchBtnClicked) {
+            switch (pageNum) {
+                case 1:
+                case pages:
+                    mainCallback(searchValue, pageNum)
+                    console.log("ssssstreona:", pageNum)
+                default:
+                    mainCallback(searchValue, pageNum)
+                    console.log("AAAATOOOOOTOTOT:", pageNum)
+            }
+        }else{
         switch (pageNum) {
             case 1:
-            case allPages:
+            case pages:
                 mainCallback(fetchCallback, pageNum, true)
             default:
                 mainCallback(fetchCallback, pageNum, false);
+        }
         }
         pageActualNum = pageNum;
     }
@@ -154,10 +169,18 @@ export const paginationRender = (ev, mainCallback, fetchCallback) => {
                     console.log("PREV SIBLING: ", prevPage)
                     pageNum = prevPage + 1;
                     paginationPlace.innerHTML = '';
-                    if (pageNum >= allPages) {
-                        mainCallback(fetchCallback, allPages - 4, true);
+                    if (searchBtnClicked) {
+                        if (pageNum >= pages) {
+                            mainCallback(searchValue, pageNum-4)
+                        } else {
+                            mainCallback(searchValue, pageNum)
+                        }
                     } else {
-                        mainCallback(fetchCallback, pageNum, true);
+                        if (pageNum >= pages) {
+                            mainCallback(fetchCallback, pages - 4, true);
+                        } else {
+                            mainCallback(fetchCallback, pageNum, true);
+                        }
                     }
                     pageActualNum = pageNum;
                     break;
@@ -169,10 +192,18 @@ export const paginationRender = (ev, mainCallback, fetchCallback) => {
                     console.log("NEXT SIBLING: ", nextPage)
                     pageNum = nextPage - 5;
                     paginationPlace.innerHTML = '';
-                    if (pageNum < 5) {
-                        mainCallback(fetchCallback, 1, true);
+                    if (searchBtnClicked) {
+                        if (pageNum < 5) {
+                            mainCallback(searchValue, 1)
+                        } else {
+                            mainCallback(searchValue, pageNum)
+                        }
                     } else {
-                        mainCallback(fetchCallback, pageNum, true);
+                        if (pageNum < 5) {
+                            mainCallback(fetchCallback, 1, true);
+                        } else {
+                            mainCallback(fetchCallback, pageNum, true);
+                        }
                     }
                     pageActualNum = pageNum;
                     break;
@@ -181,16 +212,30 @@ export const paginationRender = (ev, mainCallback, fetchCallback) => {
                 {
                     pageActualNum += 1;
                     pageNum = pageActualNum;
-                    if (pageNum > allPages) {
-                        paginationPlace.innerHTML = '';
-                        mainCallback(fetchCallback, allPages - 5, true);
-                    }
-                    if (pageNum < 4) {
-                        mainCallback(fetchCallback, pageNum, false, true);
-                    }
-                    else {
-                        paginationPlace.innerHTML = '';
-                        mainCallback(fetchCallback, pageNum, true, true);
+                    if (searchBtnClicked) {
+                        if (pageNum > pages) {
+                            paginationPlace.innerHTML = '';
+                            mainCallback(searchValue, pageNum);
+                        }
+                        if (pageNum < 4) {
+                            mainCallback(searchValue, pageNum);
+                        }
+                        else {
+                            paginationPlace.innerHTML = '';
+                            mainCallback(searchValue, pageNum);
+                        }
+                    } else {
+                        if (pageNum > pages) {
+                            paginationPlace.innerHTML = '';
+                            mainCallback(fetchCallback, pages - 5, true);
+                        }
+                        if (pageNum < 4) {
+                            mainCallback(fetchCallback, pageNum, false, true);
+                        }
+                        else {
+                            paginationPlace.innerHTML = '';
+                            mainCallback(fetchCallback, pageNum, true, true);
+                        }
                     }
                     arrowClicked = false;
                     break;
@@ -200,20 +245,33 @@ export const paginationRender = (ev, mainCallback, fetchCallback) => {
                     pageActualNum -= 1;
                     pageNum = pageActualNum;
                     paginationPlace.innerHTML = '';
-                    if (pageNum > 1) {
-                        mainCallback(fetchCallback, pageNum, true, true);
+                    if (searchBtnClicked) {
+                        if (pageNum > 1) {
+                            mainCallback(searchValue, pageNum);
+                        } else {
+                            mainCallback(searchValue, 1);
+                        }
                     } else {
-                        mainCallback(fetchCallback, 1, true, true);
+                        if (pageNum > 1) {
+                            mainCallback(fetchCallback, pageNum, true, true);
+                        } else {
+                            mainCallback(fetchCallback, 1, true, true);
+                        }
                     }
                     break;
                 }
         }
     }
-    return { pageActualNum };
 }
 
 paginationPlace.addEventListener("click", ev => {
     ev.preventDefault();
-    paginationRender(ev, page, popularMovies);
+    if (searchBtnClicked) {
+        paginationRender(ev, searchMovie,searchFetch,  searchAllPages);
+        console.log("click click", pageActualNum)
+    } else {
+        paginationRender(ev, page, popularMovies, allPages);
+    }
 })
+
 
