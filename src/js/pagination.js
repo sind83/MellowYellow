@@ -1,9 +1,8 @@
 //import {gallery} from'./cards_rendering';
 import { renderMovies } from './cards_rendering.js';
-
 import { popularMovies } from './main_fetch';
 
-const paginationPlace = document.querySelector('.film-cards__pagination');
+export const paginationPlace = document.querySelector('.film-cards__pagination');
 
 const dots = `...`;
 
@@ -17,7 +16,7 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
             }
         }
         if ((total_pages <= 8) && (total_pages >= 2)) {
-            for (let i = 0; i < total_pages; i++) {
+            for (let i = 1; i < total_pages - 1; i++) {
                 paginationPlace.innerHTML += `<div value="page" class="pagination__number pagination__button">${i + 1}</div>`
             }
         }
@@ -39,10 +38,6 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
                     else {
                         switch (pageNo + 1) {
                             case 1 - 3:
-                                // paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
-                                // break;
-                                // case 2:
-                                // case 1:
                                 paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
                                 break;
                             default:
@@ -110,8 +105,8 @@ export const clearFocus = () => {
     })
 }
 
-export const page = (pageNo = 1, renderOk = true, arrowClicked = false) => {
-    popularMovies(pageNo)
+export const page = (fetchFunc, pageNo = 1, renderOk = true, arrowClicked = false) => {
+    fetchFunc(pageNo)
         .then(elem => {
             const movies = elem.movies.results;
             const totalPages = elem.movies.total_pages;
@@ -130,15 +125,14 @@ export const page = (pageNo = 1, renderOk = true, arrowClicked = false) => {
         })
         .catch(console.warn);
 }
-page(allPages, true);
+page(popularMovies, allPages, true);
 
-
-paginationPlace.addEventListener("click", ev => {
-
+export const paginationRender = (ev, mainCallback, fetchCallback) => {
+    //ev - event, mainCallback-function doing read, fetchcallback - func geting fetch from url
     let prevPage = 0;
     let nextPage = 0;
     const pagBtn = ev.target;
-
+    console.log("Pagination button render", pagBtn);
     let pageNum = parseInt(pagBtn.textContent);
 
     const valueTemp = pagBtn.getAttribute('value');
@@ -146,9 +140,9 @@ paginationPlace.addEventListener("click", ev => {
         switch (pageNum) {
             case 1:
             case allPages:
-                page(pageNum, true)
+                mainCallback(fetchCallback, pageNum, true)
             default:
-                page(pageNum, false);
+                mainCallback(fetchCallback, pageNum, false);
         }
         pageActualNum = pageNum;
     }
@@ -157,12 +151,13 @@ paginationPlace.addEventListener("click", ev => {
             case 'dots_r':
                 {
                     prevPage = parseInt(pagBtn.previousElementSibling.textContent);
+                    console.log("PREV SIBLING: ", prevPage)
                     pageNum = prevPage + 1;
                     paginationPlace.innerHTML = '';
                     if (pageNum >= allPages) {
-                        page(allPages - 4, true);
+                        mainCallback(fetchCallback, allPages - 4, true);
                     } else {
-                        page(pageNum, true);
+                        mainCallback(fetchCallback, pageNum, true);
                     }
                     pageActualNum = pageNum;
                     break;
@@ -171,12 +166,13 @@ paginationPlace.addEventListener("click", ev => {
                 {
 
                     nextPage = parseInt(pagBtn.nextElementSibling.textContent);
+                    console.log("NEXT SIBLING: ", nextPage)
                     pageNum = nextPage - 5;
                     paginationPlace.innerHTML = '';
                     if (pageNum < 5) {
-                        page(1, true);
+                        mainCallback(fetchCallback, 1, true);
                     } else {
-                        page(pageNum, true);
+                        mainCallback(fetchCallback, pageNum, true);
                     }
                     pageActualNum = pageNum;
                     break;
@@ -187,14 +183,14 @@ paginationPlace.addEventListener("click", ev => {
                     pageNum = pageActualNum;
                     if (pageNum > allPages) {
                         paginationPlace.innerHTML = '';
-                        page(allPages - 5, true);
+                        mainCallback(fetchCallback, allPages - 5, true);
                     }
                     if (pageNum < 4) {
-                        page(pageNum, false, true);
+                        mainCallback(fetchCallback, pageNum, false, true);
                     }
                     else {
                         paginationPlace.innerHTML = '';
-                        page(pageNum, true, true);
+                        mainCallback(fetchCallback, pageNum, true, true);
                     }
                     arrowClicked = false;
                     break;
@@ -205,13 +201,19 @@ paginationPlace.addEventListener("click", ev => {
                     pageNum = pageActualNum;
                     paginationPlace.innerHTML = '';
                     if (pageNum > 1) {
-                        page(pageNum, true, true);
+                        mainCallback(fetchCallback, pageNum, true, true);
                     } else {
-                        page(1, true, true);
+                        mainCallback(fetchCallback, 1, true, true);
                     }
                     break;
                 }
         }
     }
+    return { pageActualNum };
+}
+
+paginationPlace.addEventListener("click", ev => {
+    ev.preventDefault();
+    paginationRender(ev, page, popularMovies);
 })
 
