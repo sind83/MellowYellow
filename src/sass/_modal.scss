@@ -7,15 +7,15 @@
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.2);
 
-    // &.is-hidden {
-    //     opacity: 0;
-    //     pointer-events: none;
-    // }
+    &.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
 
-    // &.is-hidden .modal {
-    //     transform: translate(-50%, -50%) scale(0.5);
-    //     opacity: 0;
-    // }
+    &.is-hidden .modal {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 0;
+    }
 }
 
 .modal {
@@ -109,7 +109,7 @@
 }
 
 .film-details__main-title {
-    font-size: 20px;
+    font-size: 30px;
     line-height: 1.15;
 }
 
