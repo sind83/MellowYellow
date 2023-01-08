@@ -31,6 +31,7 @@
     }
 }
 
+
 .left{
         background-image: url("../images/left-arrow.svg");
         
@@ -38,6 +39,10 @@
 .right {
              background-image: url("../images/right_arrow.svg");
          }
+         
 .selected{
     background-color: getColor('button-color');
+    &:hover{
+        background-color: getColor('button-color');
+    }
 }
