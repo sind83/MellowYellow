@@ -64,7 +64,7 @@
 
     &:hover,
     &:focus {
-        fill: #ff6a00;
+        fill: getColor('button-color');
     }
 }
 .modal-container-film {
@@ -125,7 +125,7 @@
         margin-top: 8px;
     }
 
-    &:nth-child(3)>.details-list__information-2 {
+    &:nth-child(3)>.details-list__info2 {
         text-transform: uppercase;
     }
 }
@@ -137,7 +137,7 @@
     width: 100px;
 }
 
-.details-list__information-1 {
+.details-list__info1 {
     display: block;
     padding: 3px 10px;
     border-radius: 5px;
@@ -160,7 +160,7 @@
     }
 }
 
-.details-list__information-2 {
+.details-list__info2 {
     display: block;
     text-align: left;
     font-size: 14px;
