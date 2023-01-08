@@ -46,12 +46,11 @@ export function renderMovies(page, results = [], genres) {
         const dots = '...';
         const cuttedTitle = title.slice(0, 35) + dots;
         const homePageTitle = title.length >= 40 ? cuttedTitle : title;
-        let releaseYear = 'unknown'
+        let releaseYear = 'unknown';
         if (release_date) {
           releaseYear = release_date.slice(0, 4);
         }
-          return `<div class='movie-card' data-movieId='${id}'>
-        
+        return `<div class='movie-card' data-movieId='${id}'>       
           <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
   <div class='movie-card__info'>
    <p class='info__title'>${homePageTitle}</p>
@@ -64,45 +63,40 @@ export function renderMovies(page, results = [], genres) {
   gallery.insertAdjacentHTML('afterbegin', markup);
 }
 
-export function renderModalMovie(page, results = [], genres) {
-  const markup = results
-    .map(
-      ({
-        poster_path,
-        title,
-        original_title,
-        genres,
-        vote_average,
-        vote_count,
-        popularity,
-        overview,
-        id,
-      }) => {
-        const genresId = genres.map(genre => genre.id);
-        const genreNames = genres
-          .map(genre => genre.name)
-          .slice(0, 3)
-          .join(', ');
-        return `<div class='movie-card movie-card--modal' data-movieId='${id}'>
+export function renderModalMovie({
+  poster_path,
+  title,
+  original_title,
+  genres,
+  vote_average,
+  vote_count,
+  popularity,
+  overview,
+  id,
+}) {
+  const genreNames = genres
+    .map(genre => genre.name)
+    .slice(0, 3)
+    .join(', ');
+  const markup = `<div class='movie-card movie-card--modal' data-movieId='${id}'>
           <img class='movie-card__image--modal' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
   <div class='movie-card__info movie-card__info--modal'>
    <p class='info--modal__title'>${title}</p>
-   <div class='info--modal__adds'>
-   <p class='adds__description'> Vote / Votes</p>
-   <p class='adds__description'> Popularity</p>
-   <p class='adds__description'> Original Title</p>
-   <p class='adds__description'> Genre</p></div> 
-   <p class='adds__value'> <span class='library'> ${vote_average}</span> / ${vote_count}</p>
-   <p class='adds__value'> ${popularity}</p>
-   <p class='adds__value adds__value--title'> ${original_title}</p>
-   <p class='adds__value'> ${genreNames}</p></div>
+   <ul class='info--modal__adds'>
+   <li class='adds__description'> Vote / Votes</li>
+   <li class='adds__description'> Popularity</li>
+   <li class='adds__description'> Original Title</li>
+   <li class='adds__description'> Genre</li></ul><ul> 
+   <li class='adds__value'> <span class='library'> ${vote_average}</span> / ${vote_count}</li>
+   <li class='adds__value'> ${popularity}</li>
+   <li class='adds__value adds__value--title'> ${original_title}</li>
+   <li class='adds__value'> ${genreNames}</li></ul>
    <p class='adds__about'><span class='adds__value--title'>About</span> ${overview}</p>
-  <div class='adds__buttons>
+  <div class='adds__buttons'>
    <button class='button button--inactive button--watched' type='button'>Add to watched</button>
    <button class='button button--inactive button--queue' type='button'>Add to queue</button>     
-        </div></div></div></div>`;
-      }
-    )
-    .join('');
-  //gallery.insertAdjacentHTML('afterbegin', markup);
+        </div></div></div>`;
+
+  const modalContent = document.querySelector('.modal-content');
+  modalContent.insertAdjacentHTML('afterbegin', markup);
 }
