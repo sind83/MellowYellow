@@ -41,7 +41,7 @@ let allPages = 1;
 export let searchAllPages;
 export let findMovie;
 
-export const searchMovie = (searchValue, searchPage = 1) => {
+export const searchMovie = (searchValue, searchPage = 1, arrowClicked=false) => {
   // const parsedName = searchValue.trim();
   //   const reg = new RegExp('^[a-zA-Z s]*$');
   // if (parsedName.length === 0) {
@@ -59,10 +59,10 @@ export const searchMovie = (searchValue, searchPage = 1) => {
       allPages = totalPages;
       console.log("From search: ",allPages, totalPages);
       const genresIds = elem.genreIds.genres;
-      if (searchPageNo >= totalPages - 5) {
-        pagination(totalPages, searchPage - 5, false);
+      if (searchPage >= totalPages - 5) {
+        pagination(totalPages, searchPage-5, arrowClicked);
         } else {
-        pagination(totalPages, searchPage, false);
+        pagination(totalPages, searchPage, arrowClicked);
         }
 
       // if (totalResults === 0) {
@@ -83,6 +83,7 @@ export const searchMovie = (searchValue, searchPage = 1) => {
 
 form.addEventListener('submit', event => {
   event.preventDefault();
+  pageNum = 1;
   searchValue = input.value;
   searchBtnClicked = true;
   console.log("Szukamy: ", searchValue, allPages, searchAllPages);
