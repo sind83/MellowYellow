@@ -1,0 +1,39 @@
+.film-cards {
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+
+  &--loader {
+    justify-content: center;
+    padding: 100px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .film-cards {
+    padding-top: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
+
+    &--loader {
+      justify-content: center;
+      padding: 100px;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .film-cards {
+    justify-content: flex-start;
+
+    &--loader {
+      justify-content: center;
+    }
+  }
+}

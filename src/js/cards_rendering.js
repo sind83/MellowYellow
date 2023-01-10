@@ -98,5 +98,5 @@ export function renderModalMovie({
         </div></div></div>`;
 
   const modalContent = document.querySelector('.modal-content');
-  modalContent.insertAdjacentHTML('afterbegin', markup);
+  modalContent.innerHTML = markup;
 }
