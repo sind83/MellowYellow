@@ -82,16 +82,16 @@
 }
 
 .modal-img {
-    width: 340px;
-    height: 478px;
-    object-fit: cover;
-    object-position: cover;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
     border-radius: 5px;
 
-    @include tablet {
-        width: 264px;
-        height: 357px;
-    }
+    // @include tablet {
+    //     width: 264px;
+    //     height: 357px;
+    // }
 
     @include desktop {
         width: 396px;
