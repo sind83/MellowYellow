@@ -26,9 +26,9 @@
 .modal {
     overflow-y: scroll;
     overflow-x: hidden;
-    padding: 15px;
+    padding: 20px;
     padding-bottom: 40px;
-    max-width: 240px;
+    max-width: 280px;
     width: 80vw;
     height: 100vh;
 
@@ -106,9 +106,7 @@
 }
 
 .film-details {
-    // @media screen and (max-width: 767.98px) {
-    //     margin-top: 20px;
-    // }
+font-weight: 500;
 margin-top: 20px;
 
     @include tablet {
@@ -132,6 +130,7 @@ margin-top: 20px;
 
 .details-list {
     margin-top: 20px;
+    
 }
 
 .details-list__item {
@@ -152,6 +151,7 @@ margin-top: 20px;
     font-size: 12px;
     line-height: 1.33;
     width: 100px;
+    margin-right: 11px;
     display: inline;
 }
 
@@ -162,7 +162,7 @@ margin-top: 20px;
     color: white;
     background-color: #ff6a00;
     font-size: 12px;
-    line-height: 1.16;
+    line-height: 1.33;
     text-transform: uppercase;
 
 }
@@ -170,14 +170,14 @@ margin-top: 20px;
 .details-list__info2 {
     display: block;
     text-align: left;
-    font-size: 14px;
-    line-height: 1.16;
+    font-size: 12px;
+    line-height: 1.33;
 }
 
 .film-details__secondary-title {
     margin-top: 20px;
-    font-size: 14px;
-    line-height: 1.16;
+    font-size: 12px;
+    line-height: 1.33;
     text-transform: uppercase;
 }
 
@@ -190,18 +190,10 @@ margin-top: 20px;
 .button {
     width: 136px;
     height: 44px;
-    // // border-radius: 5px;
+    
     margin-top: 21px;
     margin-right: 15px;
-    // padding-top: 14px;
-    // padding-bottom: 12px;
-    // text-align: center;
-    // text-transform: uppercase;
-    // cursor: pointer;
-    // font-family: getFont('main-font');
-    // font-weight: 500;
-    // font-size: 12px;
-    // line-height: 1.33;
+    
    color: getColor('main-color');
 
     &--active {
