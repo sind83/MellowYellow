@@ -28,6 +28,7 @@
     overflow-x: hidden;
     padding: 15px;
     padding-bottom: 40px;
+    max-width: 240px;
     width: 80vw;
     height: 100vh;
 
@@ -35,11 +36,12 @@
 
     background-color: getColor('basic-color');
 
-    @media screen and (min-width: 500px) {
-        width: 350px;
-    }
+    // @media screen and (min-width: 500px) {
+    //     width: 350px;
+    // }
 
     @include tablet {
+        max-width: none;
         width: 700px;
         overflow-y: hidden;
         height: auto;
@@ -82,27 +84,32 @@
 }
 
 .modal-img {
+    max-width: 240px;
     width: auto;
     height: auto;
     object-fit: contain;
     object-position: center;
     border-radius: 5px;
 
-    // @include tablet {
-    //     width: 264px;
-    //     height: 357px;
-    // }
+    @include tablet {
+        width: 264px;
+        height: 357px;
+    }
 
     @include desktop {
-        width: 396px;
+        object-fit: fill;
+        
+        max-width: none;
+        width: auto;
         height: 478px;
     }
 }
 
 .film-details {
-    @media screen and (max-width: 767.98px) {
-        margin-top: 20px;
-    }
+    // @media screen and (max-width: 767.98px) {
+    //     margin-top: 20px;
+    // }
+margin-top: 20px;
 
     @include tablet {
         width: 50%;
@@ -116,7 +123,7 @@
 
 .film-details__main-title {
     font-size: 20px;
-    line-height: 1.33;
+    line-height: 1.17;
     text-transform: uppercase;
     @include desktop {
             font-size: 30px;
@@ -145,6 +152,7 @@
     font-size: 12px;
     line-height: 1.33;
     width: 100px;
+    display: inline;
 }
 
 .details-list__info1 {
