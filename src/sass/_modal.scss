@@ -1,6 +1,7 @@
 @import './utils/variables';
 @import './utils/mixin';
 @import './common';
+@import '~node_modules/modern-normalize/modern-normalize.css';
 
 .backdrop {
     z-index: 999;
@@ -45,7 +46,7 @@
     }
 
     @include desktop {
-        width: 728px;
+        width: 882px;
     }
 
     opacity: 1;
@@ -93,7 +94,7 @@
     }
 
     @include desktop {
-        width: 340px;
+        width: 396px;
         height: 478px;
     }
 }
@@ -153,17 +154,6 @@
     line-height: 1.16;
     text-transform: uppercase;
 
-    &.masterpiece {
-        background-color: #66cc33;
-    }
-
-    &.good {
-        background-color: #ffcc33;
-    }
-
-    &.bad {
-        background-color: #f00000;
-    }
 }
 
 .details-list__info2 {
@@ -186,6 +176,28 @@
     line-height: 1.66;
 }
 
-// .buttons-list {
+.button {
+    width: 100%;
+    border-radius: 5px;
+    padding-top: 14px;
+    padding-bottom: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: getFont('main-font');
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: getColor('main-color');
 
-// }
+    &--active {
+        border: none;
+        background-color: getColor('button-color');
+        color: getColor('basic-color');
+    }
+
+    &--inactive {
+        background-color: transparent;
+        border: 1px solid getColor('main-color');
+    }
+}
