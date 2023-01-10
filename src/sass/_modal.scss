@@ -1,3 +1,7 @@
+@import './utils/variables';
+@import './utils/mixin';
+@import './common';
+
 .backdrop {
     z-index: 999;
     position: fixed;
@@ -28,7 +32,7 @@
 
     border-radius: 6px;
 
-    background-color: getColor('background');
+    background-color: getColor('basic-color');
 
     @media screen and (min-width: 500px) {
         width: 350px;
@@ -81,6 +85,7 @@
     height: 478px;
     object-fit: cover;
     object-position: cover;
+    border-radius: 5px;
 
     @include tablet {
         width: 264px;
@@ -109,8 +114,9 @@
 }
 
 .film-details__main-title {
-    font-size: 30px;
-    line-height: 1.15;
+    font-size: 20px;
+    line-height: 1.33;
+    text-transform: uppercase;
 }
 
 .details-list {
