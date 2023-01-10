@@ -26,7 +26,6 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
             }
 
             else {
-                console.log("Hurray2", searchBtnClicked, "page no:", pageNo)
                 let initI = 0 + pageNo;
                 if (arrowClicked) {
 
@@ -43,24 +42,16 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
                         }
                         else {
                             console.log('PRZED SWITCH: ', pageNo)
-                            switch (pageNo+1) {
+                            switch (pageNo) {
 
                                 case 1:
-                                    console.log("WHAT IS THE PAGE NO in 1: ", pageNo, "and +1")
+                                    paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
                                     break;
                                 case 2:
-                                    paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
-                                    console.log("WHAT IS THE PAGE NO in 2: ", pageNo, "and +1")
-                                    break;
-                                case 3:
                                     paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i-1}</div>`
+                                   
                                     break;
-                                // case 4:
-                                //     console.log("WHAT IS THE PAGE NO: ", pageNo, "and +1")
-                                //     paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i-2}</div>`
-                                //     break;
-                                default:
-                                    console.log("WHAT IS THE PAGE NO in DEFAULT: ", pageNo, "and +1")
+                                default:                                 
                                     paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 2}</div>`
                             }
                         }
