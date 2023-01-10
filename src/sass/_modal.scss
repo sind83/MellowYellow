@@ -179,17 +179,19 @@
 .button {
     width: 136px;
     height: 44px;
-    border-radius: 5px;
-    padding-top: 14px;
-    padding-bottom: 12px;
-    text-align: center;
-    text-transform: uppercase;
-    cursor: pointer;
-    font-family: getFont('main-font');
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
-    color: getColor('main-color');
+    // // border-radius: 5px;
+    margin-top: 21px;
+    margin-right: 15px;
+    // padding-top: 14px;
+    // padding-bottom: 12px;
+    // text-align: center;
+    // text-transform: uppercase;
+    // cursor: pointer;
+    // font-family: getFont('main-font');
+    // font-weight: 500;
+    // font-size: 12px;
+    // line-height: 1.33;
+   color: getColor('main-color');
 
     &--active {
         border: none;
