@@ -8,13 +8,16 @@ import {
   timeInt,
 } from './pagination';
 import { API_KEY, GENRE_URL, API_URL } from './main_fetch.js';
+import { displayGalleryLoader, hideGalleryLoader } from './loader_spinner.js';
 
 const SEARCH_URL = `https://api.themoviedb.org/3/search/movie?api_key=`;
 
 const form = document.querySelector('.search-form');
 export const input = document.querySelector('.search-form__input');
 export const gallery = document.querySelector('.film-cards');
-const paginationPlace = document.querySelector('.film-cards__pagination');
+export const paginationPlace = document.querySelector(
+  '.film-cards__pagination'
+);
 export let searchValue;
 export let searchBtnClicked = false;
 
@@ -45,7 +48,11 @@ let allPages = 1;
 export let searchAllPages;
 export let findMovie;
 
-export const searchMovie = (searchValue, searchPage = 1, arrowClicked=false) => {
+export const searchMovie = (
+  searchValue,
+  searchPage = 1,
+  arrowClicked = false
+) => {
   // const parsedName = searchValue.trim();
   //   const reg = new RegExp('^[a-zA-Z s]*$');
   // if (parsedName.length === 0) {
@@ -76,7 +83,10 @@ export const searchMovie = (searchValue, searchPage = 1, arrowClicked=false) => 
       // if (totalResults < 20) {
       //   paginationPlace.innerHTML = '';
       // }
-      renderMovies(0, movies, genresIds);
+      setTimeout(() => {
+        hideGalleryLoader();
+        renderMovies(0, movies, genresIds);
+      }, 2000);
       clearFocus();
       selectBtn(paginationPlace.children, searchPageNo);
     })
@@ -89,6 +99,7 @@ form.addEventListener('submit', event => {
   searchValue = input.value;
   searchBtnClicked = true;
   console.log('Szukamy: ', searchValue, allPages, searchAllPages);
+  displayGalleryLoader();
   searchMovie(searchValue);
   searchAllPages = allPages;
   console.log(
