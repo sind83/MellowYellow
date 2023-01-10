@@ -118,6 +118,9 @@
     font-size: 20px;
     line-height: 1.33;
     text-transform: uppercase;
+    @include desktop {
+            font-size: 30px;
+        }
 }
 
 .details-list {
