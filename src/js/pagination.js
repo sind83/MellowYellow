@@ -1,186 +1,115 @@
-//import {gallery} from'./cards_rendering';
+
 import { renderMovies } from './cards_rendering.js';
 import { popularMovies } from './main_fetch';
-import { searchBtnClicked, input, searchMovie, searchValue, searchFetch, searchAllPages } from './movie_search.js';
+import { searchBtnClicked, searchMovie, searchValue, searchFetch, searchAllPages } from './movie_search.js';
 
 export const paginationPlace = document.querySelector('.film-cards__pagination');
+const form = document.querySelector('.search-form');
 
 const dots = `...`;
 
+
 export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) => {
     paginationPlace.innerHTML = '';
-    if (searchBtnClicked) {
-        //-------------------------------------------------------
-        console.log("Hurray", searchBtnClicked, "page no:", pageNo)
-        if ((total_pages >= 2)) {
-            if (pageNo > 1) {
-                paginationPlace.innerHTML += `<div value="arrow_l" class="pagination__arrow left pagination__button"></div>`;
-                if (pageNo > 3) {
-                    paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`;
-                }
-            }
-            if ((total_pages <= 8)) {
-                for (let i = 0; i < total_pages; i++) {
-                    paginationPlace.innerHTML += `<div value="page" class="pagination__number pagination__button">${i + 1}</div>`
-                }
-            }
+    if ((total_pages >= 2)) {
+        if (pageNo > 1) {
+            paginationPlace.innerHTML += `<div value="arrow_l" class="pagination__arrow left pagination__button"></div>`;
 
-            else {
-                let initI = 0 + pageNo;
-                if (arrowClicked) {
+            if (pageNo > 3) {
+                paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`;
+            }
+        }
+        if ((total_pages <= 5) && (total_pages >= 2)) {
+            for (let i = 0; i < total_pages - 1; i++) {
+                paginationPlace.innerHTML += `<div value="page" class="pagination__number pagination__button">${i + 1}</div>`
+            }
+        }
+        else {
+            let initI = pageNo;
+            if (arrowClicked) {
 
-                    for (let i = initI; i < initI + 6; i++) {
-                        if ((i == initI)) {
-                            if (pageNo > 3) {
-                                paginationPlace.innerHTML += `<div value ="dots_l" class = "pagination__button" >${dots}</div>`
-                            }
+                for (let i = initI; i < initI + 6; i++) {
+
+                    if ((i == initI)) {
+                        if (pageNo > 3) {
+                            paginationPlace.innerHTML += `<div value ="dots_l" class = "pagination__button" >${dots}</div>`
                         }
-                        if (i == 5 + initI) {
-                            if (pageNo != total_pages - 5) {
-                                paginationPlace.innerHTML += `<div value ="dots_r" class = "pagination__button" >${dots}</div>`
-                            }
+                    }
+                    if (i == 5 + initI) {
+                        if (pageNo < total_pages - 2) {
+                            paginationPlace.innerHTML += `<div value ="dots_r" class = "pagination__button" >${dots}</div>`
                         }
-                        else {
-                            console.log('PRZED SWITCH: ', pageNo)
+                    }
+                    else {
+                        if (pageNo < total_pages) {
                             switch (pageNo) {
-
+                                case 2:
+                                    paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 1}</div>`
+                                    break;
                                 case 1:
+                                    //case 4:
                                     paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
                                     break;
-                                case 2:
-                                    paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i-1}</div>`
-                                   
+                                case (total_pages - 1):
+                                    paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 3}</div>`
                                     break;
-                                default:                                 
+                                case (total_pages - 2):
+                                    paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 2}</div>`
+                                    break;
+                                case (total_pages - 3):
+                                    paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 2}</div>`
+                                    break;
+                                default:
                                     paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 2}</div>`
                             }
                         }
-                    }
-                } else {
-                    for (let i = initI; i < initI + 6; i++) {
-                        if ((i == initI)) {
-                            if (pageNo > 3) {
-                                paginationPlace.innerHTML += `<div value ="dots_l" class = "pagination__button" >${dots}</div>`
-                            }
-                        }
-                        if (i == 5 + initI) {
-                            if (pageNo != total_pages - 5) {
-                                paginationPlace.innerHTML += `<div value ="dots_r" class = "pagination__button" >${dots}</div>`
-                            }
-                        }
                         else {
-                            paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
-                        }
-                    }
-
-                }
-            }
-
-            paginationPlace.innerHTML += `<div value="page" class="pagination__button">${total_pages}</div>`;
-            if (pageNo !== total_pages - 5) {
-                paginationPlace.innerHTML += `<div value="arrow_r" class = "pagination__arrow right pagination__button"></div>`
-            }
-        }
-
-        if (total_pages == 1) {
-            paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`
-        }
-        //------------------------------------------------------------------------
-        
-    }
-    else {
-        if ((total_pages >= 2)) {
-            console.log("Hurray Old", searchBtnClicked, "page no:", pageNo)
-            if (pageNo > 1) {
-                paginationPlace.innerHTML += `<div value="arrow_l" class="pagination__arrow left pagination__button"></div>`;
-                if (pageNo > 3) {
-                    paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`;
-                }
-            }
-            if ((total_pages <= 8) && (total_pages >= 2)) {
-                for (let i = 0; i < total_pages - 1; i++) {
-                    paginationPlace.innerHTML += `<div value="page" class="pagination__number pagination__button">${i + 1}</div>`
-                }
-            }
-            else{
-                let initI = pageNo;
-                if (arrowClicked) {
-
-                    for (let i = initI; i < initI + 6; i++) {
-                        if ((i == initI)) {
-                            if (pageNo > 3) {
-                                paginationPlace.innerHTML += `<div value ="dots_l" class = "pagination__button" >${dots}</div>`
-                            }
-                        }
-                        if (i == 5 + initI) {
-                            if (pageNo < total_pages - 2) {
-                                paginationPlace.innerHTML += `<div value ="dots_r" class = "pagination__button" >${dots}</div>`
-                            }
-                        }
-                        else {
-                            if (pageNo < total_pages) {
-                                switch (pageNo) {
-                                    case 2:
-                                        paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 1}</div>`
-                                        break;
-                                    case 1:
-                                        //case 4:
-                                        paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
-                                        break;
-                                    case (total_pages - 1):
-                                        paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 3}</div>`
-                                        break;
-                                    case (total_pages - 2):
-                                        paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 2}</div>`
-                                        break;
-                                    case (total_pages - 3):
-                                        paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 2}</div>`
-                                        break;
-                                    default:
-                                        paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 2}</div>`
-                                }
-                            }
-                            else {
-                                paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 4}</div>`
-                            }
-                        }
-                    }
-                } else {
-                    for (let i = initI; i < initI + 6; i++) {
-                        if ((i == initI)) {
-                            if (pageNo > 5) {
-                                paginationPlace.innerHTML += `<div value ="dots_l" class = "pagination__button" >${dots}</div>`
-                            }
-                        }
-                        
-                        if (pageNo >= total_pages) {
                             paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 5}</div>`
                         }
-                        else {
-                            paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
-                        }
-                        if (i == 5 + initI) {
-                            if (pageNo < total_pages) {
-                                paginationPlace.innerHTML += `<div value ="dots_r" class = "pagination__button" >${dots}</div>`
-                            }
+                    }
+                }
+            } else {
+
+                let corection = 6;
+                if (pageNo >= total_pages) {
+                    corection = 5
+                }
+
+                for (let i = initI; i < initI + corection; i++) {
+                    if ((i == initI)) {
+                        if (pageNo > 4) {
+                            paginationPlace.innerHTML += `<div value ="dots_l" class = "pagination__button" >${dots}</div>`
                         }
                     }
 
+                    if (pageNo >= total_pages) {
+                        paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 4}</div>`
+                    }
+                    else {
+                        paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
+                    }
+                    if (i == 4 + initI) {
+                        if (pageNo < total_pages) {
+                            paginationPlace.innerHTML += `<div value ="dots_r" class = "pagination__button" >${dots}</div>`
+                        }
+                    }
                 }
-            }
-            if (pageNo < total_pages-2) {
-                paginationPlace.innerHTML += `<div value="page" class="pagination__button">${total_pages}</div>`;
-            }
-            if (pageNo < total_pages) {
-                paginationPlace.innerHTML += `<div value="arrow_r" class = "pagination__arrow right pagination__button"></div>`
+
             }
         }
-
-        if (total_pages == 1) {
-            paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`
+        if (pageNo < total_pages - 2) {
+            paginationPlace.innerHTML += `<div value="page" class="pagination__button">${total_pages}</div>`;
+        }
+        if (pageNo < total_pages) {
+            paginationPlace.innerHTML += `<div value="arrow_r" class = "pagination__arrow right pagination__button"></div>`
         }
     }
+
+    if (total_pages == 1) {
+        paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`
+    }
 }
+
 
 
 let allPages = 1;
@@ -228,13 +157,13 @@ export const page = (fetchFunc, pageNo = 1, renderOk = true, arrowClicked = fals
             //         }
             //     }
             // } else {
-            if (renderOk) {
-                if (pageNo >= allPages) {
-                    pagination(totalPages, pageNo, arrowClicked);
-                } else {
-                    pagination(totalPages, pageNo, arrowClicked);
-                }
+            // if (renderOk) {
+            if (pageNo >= allPages) {
+                pagination(totalPages, pageNo, false);
+            } else {
+                pagination(totalPages, pageNo, true);
             }
+            // }
             // }
             renderMovies(0, movies, genresIds);
             clearFocus();
@@ -249,7 +178,6 @@ export const paginationRender = (ev, mainCallback, fetchCallback, pages) => {
     let prevPage = 0;
     let nextPage = 0;
     const pagBtn = ev.target;
-    console.log("Pagination button render", pagBtn);
     let pageNum = parseInt(pagBtn.textContent);
 
     const valueTemp = pagBtn.getAttribute('value');
@@ -278,8 +206,7 @@ export const paginationRender = (ev, mainCallback, fetchCallback, pages) => {
             case 'dots_r':
                 {
                     prevPage = parseInt(pagBtn.previousElementSibling.textContent);
-                    console.log("PREV PAGE: ",prevPage)
-                    pageNum = prevPage + 1;
+                    pageNum = prevPage + 3;
                     paginationPlace.innerHTML = '';
                     if (searchBtnClicked) {
                         if (pageNum >= pages) {
@@ -300,7 +227,7 @@ export const paginationRender = (ev, mainCallback, fetchCallback, pages) => {
             case 'dots_l':
                 {
                     nextPage = parseInt(pagBtn.nextElementSibling.textContent);
-                    pageNum = nextPage - 5;
+                    pageNum = nextPage - 3;
                     paginationPlace.innerHTML = '';
                     if (searchBtnClicked) {
                         if (pageNum < 5) {
@@ -325,14 +252,14 @@ export const paginationRender = (ev, mainCallback, fetchCallback, pages) => {
                     if (searchBtnClicked) {
                         if (pageNum > pages) {
                             paginationPlace.innerHTML = '';
-                            mainCallback(searchValue, pages - 5, true);
+                            mainCallback(searchValue, pageNum, true);
                         }
                         if (pageNum < 2) {
-                            mainCallback(searchValue, pageNum, true);
+                            mainCallback(searchValue, pageNum, true, true);
                         }
                         else {
                             paginationPlace.innerHTML = '';
-                            mainCallback(searchValue, pageNum, true);
+                            mainCallback(searchValue, pageNum, true, true);
                         }
                     } else {
                         if (pageNum > pages) {
@@ -357,9 +284,9 @@ export const paginationRender = (ev, mainCallback, fetchCallback, pages) => {
                     paginationPlace.innerHTML = '';
                     if (searchBtnClicked) {
                         if (pageNum > 1) {
-                            mainCallback(searchValue, pageNum, true);
+                            mainCallback(searchValue, pageNum, true, true);
                         } else {
-                            mainCallback(searchValue, 1, true);
+                            mainCallback(searchValue, 1, true, true);
                         }
                     } else {
                         if (pageNum > 0) {
@@ -381,10 +308,12 @@ paginationPlace.addEventListener("click", ev => {
 
     if (searchBtnClicked) {
         paginationRender(ev, searchMovie, searchFetch, searchAllPages);
-        console.log("click click", pageActualNum)
     } else {
         paginationRender(ev, page, popularMovies, allPages);
     }
 })
 
 
+form.addEventListener("click", ev => {
+    pageActualNum = 1;
+})
