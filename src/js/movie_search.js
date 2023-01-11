@@ -83,35 +83,36 @@ export const searchMovie = (
     })
     .catch(error => console.log(error));
 };
-
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  pageNum = 1;
-  searchValue = input.value;
-  if (searchValue.length === 0) {
-    paginationPlace.innerHTML = '';
-    return Notiflix.Notify.info(
-      'Enter any character to search or choose one from popular movies!'
-    );
-  }
-  searchBtnClicked = true;
-  console.log('Szukamy: ', searchValue, allPages, searchAllPages);
-  displayGalleryLoader();
-  searchMovie(searchValue);
-  searchAllPages = allPages;
-  console.log(
-    'Wygenerowane: ',
-    searchValue,
-    allPages,
-    searchAllPages,
-    findMovie
-  );
-  console.log('czy kliknięty button search ', searchBtnClicked);
-});
-input.addEventListener(
-  'input',
-  debounce(event => {
-    searchMovie(event.target.value);
+if (window.location.pathname !== '/library.html') {
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    pageNum = 1;
+    searchValue = input.value;
+    if (searchValue.length === 0) {
+      paginationPlace.innerHTML = '';
+      return Notiflix.Notify.info(
+        'Enter any character to search or choose one from popular movies!'
+      );
+    }
+    searchBtnClicked = true;
+    console.log('Szukamy: ', searchValue, allPages, searchAllPages);
+    displayGalleryLoader();
+    searchMovie(searchValue);
     searchAllPages = allPages;
-  }, 1000)
-);
+    console.log(
+      'Wygenerowane: ',
+      searchValue,
+      allPages,
+      searchAllPages,
+      findMovie
+    );
+    console.log('czy kliknięty button search ', searchBtnClicked);
+  });
+  input.addEventListener(
+    'input',
+    debounce(event => {
+      searchMovie(event.target.value);
+      searchAllPages = allPages;
+    }, 1000)
+  );
+}
