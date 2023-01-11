@@ -28,19 +28,19 @@ function openModal(e) {
 
   else {
     document.addEventListener('keydown', checkModalKey);
-    
-    if (e.target.closest('span').classList.contains('team-link')) {
-      refs.backdropModal.classList.remove('is-hidden');
-      // document.addEventListener('keydown', checkModalKey);
-      modalTeam();
-    }
-    if (e.target.closest('div').classList.contains('movie-card')) {
+    if (e.target?.closest('div')?.classList.contains('movie-card')) {
       refs.backdropModal.classList.remove('is-hidden');
       // document.addEventListener('keydown', checkModalKey);
       oneMovieFetch(id).then(elem => {
         renderModalMovie(elem);
       });
     }
+    if (e.target?.closest('span')?.classList.contains('team-link')) {
+      refs.backdropModal.classList.remove('is-hidden');
+      // document.addEventListener('keydown', checkModalKey);
+      modalTeam();
+    }
+    
   }
 }
 
