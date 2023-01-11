@@ -116,9 +116,9 @@ export function renderModalMovie({
     //  <button class='button button--inactive button--queue' type='button'>Add to queue</button>
     //       </div></div></div>`
     `<div class="modal-container-film">
-                <img class="modal-img" src='https://image.tmdb.org/t/p/w500/${posterImage}' alt='${title}' loading='lazy'/>
+                <img class="modal-img" src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy'/>
                 <div class="film-details">
-                    <h2 class="film-details__main-title">${title}</h2>
+                    <h2 class="film-details__main-title" >${title}</h2>
                     <ul class="details-list list">
                         <li class="details-list__item">
                             <p class="details-list_title">Vote / Votes</p>
