@@ -170,20 +170,25 @@
 .adds_buttons {
   display: inline;
 }
-.button {
-  width: 112.58px;
-  height: 44px;
-  margin-top: 21px;
-  margin-right: 15px;
-  color: getColor('main-color');
-  &:hover,
-  &:focus {
-    border: none;
-    background-color: getColor('button-color');
-    color: getColor('basic-color');
-  }
-  &--inactive {
-    background-color: transparent;
-    border: 1px solid getColor('main-color');
-  }
+.button--modal {
+    width: 112.58px;
+    height: 44px;
+    
+    margin-top: 21px;
+    margin-right: 15px;
+    
+   color: getColor('main-color');
+border: 1px solid getColor('main-color');
+    &:hover,
+        &:focus,
+        &--active {
+        border: none;
+        background-color: getColor('button-color');
+        color: getColor('basic-color');
+    }
+
+    &--inactive {
+        background-color: transparent;
+        border: 1px solid getColor('main-color');
+    }
 }

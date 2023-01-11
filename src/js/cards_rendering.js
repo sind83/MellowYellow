@@ -141,8 +141,8 @@ export function renderModalMovie({
                     <ul class="buttons-list list">
                     </ul>
                     <div class='adds__buttons'>
-    <button class='button button--inactive button--watched' type='button'>Add to watched</button>
-    <button class='button button--inactive button--queue' type='button'>Add to queue</button>
+    <button class='button button--modal button--inactive button--watched' type='button'>Add to watched</button>
+    <button class='button button--modal button--inactive button--queue' type='button'>Add to queue</button>
     </div>
                 </div>
             </div>`;
