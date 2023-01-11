@@ -8,7 +8,6 @@ export function renderMovies(page, results = [], genres) {
   const markup = results
     .map(
       ({ poster_path, title, genre_ids, vote_average, release_date, id }) => {
-        console.log('postery', poster_path);
         const genresId = genres.map(genre => genre.id);
         const genreNames = genres.map(genre => genre.name);
         const genresNames = [];
@@ -16,10 +15,13 @@ export function renderMovies(page, results = [], genres) {
           genresNames.push(genresId.indexOf(id));
           return genresNames;
         });
-        const namesOfGenre = genresNames
-          .map(idik => genreNames[idik])
-          .slice(0, 3)
-          .join(', ');
+        let namesOfGenre = 'unknown';
+        if (genre_ids) {
+          namesOfGenre = genresNames
+            .map(idik => genreNames[idik])
+            .slice(0, 3)
+            .join(', ');
+        }
 
         //funkcja Marty
         // const genresArray = {};
