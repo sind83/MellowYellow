@@ -1,4 +1,5 @@
 import { popularMovies } from './main_fetch';
+import { hideModalLoader } from './loader_spinner';
 
 export const gallery = document.querySelector('.film-cards');
 
@@ -145,7 +146,7 @@ export function renderModalMovie({
     </div>
                 </div>
             </div>`;
-
+  hideModalLoader();
   const modalContent = document.querySelector('.modal-content');
   modalContent.innerHTML = markup;
 }
