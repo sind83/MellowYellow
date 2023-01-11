@@ -12,7 +12,6 @@ modal.addEventListener('click', ev => {
   ) {
     const movieId = modal.querySelector('div[data-movieid]');
     const titleId = modal.querySelector('.film-details__main-title');
-    console.log(titleId);
 
     let queuedList = JSON.parse(localStorage.getItem(storageKeyQueue));
     if (queuedList == null) {

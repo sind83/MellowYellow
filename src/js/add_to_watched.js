@@ -17,15 +17,17 @@ modal.addEventListener('click', ev => {
     if (watchedList == null) {
       watchedList = [];
     }
+
+    const movieInfo = {
+      id: movieId.dataset.movieid,
+      title: titleId.innerHTML,
+    };
     let watchedIds = [];
     watchedList.forEach(watchedMovie => {
       console.log(watchedMovie.id);
       watchedIds.push(watchedMovie.id);
     });
-    const movieInfo = {
-      id: movieId.dataset.movieId,
-      title: titleId.innerHTML,
-    };
+  
     if (watchedIds.includes(movieInfo.id)) {
       alert('You already added the movie to watched');
     } else {
