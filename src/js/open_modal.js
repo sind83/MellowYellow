@@ -1,5 +1,5 @@
 import { renderModalMovie } from './cards_rendering';
-
+import { modalTeam } from './modal_team';
 import { API_KEY, GENRE_URL, API_URL } from './main_fetch.js';
 
 const MOVIE_URL = `https://api.themoviedb.org/3/movie/`;
@@ -19,17 +19,27 @@ function openModal(e) {
   if (e.target.classList.contains('backdrop')) {
     closeModal();
   }
+  const id = e.target.getAttribute('data-movieId');
   if (e.target?.closest('svg')?.classList.contains('modal-close')) {
     closeModal();
   }
-  const id = e.target.getAttribute('data-movieId');
-  if (e.target.closest('div').classList.contains('movie-card')) {
-    refs.backdropModal.classList.remove('is-hidden');
+  
+  
 
+  else {
     document.addEventListener('keydown', checkModalKey);
-    oneMovieFetch(id).then(elem => {
-      renderModalMovie(elem);
-    });
+    if (e.target.closest('span').classList.contains('team-link')) {
+      refs.backdropModal.classList.remove('is-hidden');
+      // document.addEventListener('keydown', checkModalKey);
+      modalTeam();
+    }
+    if (e.target.closest('div').classList.contains('movie-card')) {
+      refs.backdropModal.classList.remove('is-hidden');
+      // document.addEventListener('keydown', checkModalKey);
+      oneMovieFetch(id).then(elem => {
+        renderModalMovie(elem);
+      });
+    }
   }
 }
 

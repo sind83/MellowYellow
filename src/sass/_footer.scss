@@ -15,7 +15,8 @@
 }
 
 
-.footer a {
+.footer span {
     text-decoration: underline;
     color: getColor('copyright-info');
+    cursor: pointer;
 }
