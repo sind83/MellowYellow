@@ -5,7 +5,6 @@ const storageKeyWatched = 'movies-watched';
 
 modal.addEventListener('click', ev => {
   const targetEl = ev.target;
-  console.log(targetEl);
   if (
     targetEl.nodeName == 'BUTTON' &&
     targetEl.classList.contains('button--watched')
@@ -18,16 +17,19 @@ modal.addEventListener('click', ev => {
       watchedList = [];
     }
 
+    //making an object which will be saved in localStorage
     const movieInfo = {
       id: movieId.dataset.movieid,
       title: titleId.innerHTML,
     };
+
+    // making a list of ids that are already in localStorage
     let watchedIds = [];
     watchedList.forEach(watchedMovie => {
-      console.log(watchedMovie.id);
       watchedIds.push(watchedMovie.id);
     });
-  
+    
+    //checking if the film is already in localStorage or not
     if (watchedIds.includes(movieInfo.id)) {
       alert('You already added the movie to watched');
     } else {
