@@ -11,7 +11,7 @@ const dots = `...`;
 
 export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) => {
     paginationPlace.innerHTML = '';
-    if ((total_pages >= 2)) {
+    if ((total_pages >= 1)) {
         if (pageNo > 1) {
             paginationPlace.innerHTML += `<div value="arrow_l" class="pagination__arrow left pagination__button"></div>`;
 
@@ -19,7 +19,7 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
                 paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`;
             }
         }
-        if ((total_pages <= 5) && (total_pages >= 2)) {
+        if ((total_pages <= 5) && (total_pages >= 1)) {
             for (let i = 0; i < total_pages - 1; i++) {
                 paginationPlace.innerHTML += `<div value="page" class="pagination__number pagination__button">${i + 1}</div>`
             }
