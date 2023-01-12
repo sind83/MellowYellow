@@ -214,8 +214,10 @@ border: 1px solid getColor('main-color');
 
 .team-details__list {
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
 }
 .team_img {
-    width: 240px;
+    width: 200px;
     height: auto;
 }
