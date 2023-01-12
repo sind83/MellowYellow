@@ -1,5 +1,5 @@
 import { renderModalMovie } from './cards_rendering';
-import { displayModalLoader, hideModalLoader } from './loader_spinner';
+import { displayModalLoader } from './loader_spinner';
 import { API_KEY, GENRE_URL, API_URL } from './main_fetch.js';
 
 const MOVIE_URL = `https://api.themoviedb.org/3/movie/`;
@@ -30,7 +30,6 @@ function openModal(e) {
     displayModalLoader();
     oneMovieFetch(id).then(elem => {
       setTimeout(() => {
-        hideModalLoader();
         renderModalMovie(elem);
       }, 2000);
     });

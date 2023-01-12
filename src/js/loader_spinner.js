@@ -1,8 +1,17 @@
-const loader = `<div class="loader">
-<img class="loader__img" src="./images/logo_white.png" alt="logo loader spinner"/>
+const loader = `<div class="loader"><svg class="loader__icon" width="38" height="38">
+              <use href="./images/icons_optimalised.svg#icon-film"></use>
+            </svg>
 </div>`;
 const gallery = document.querySelector('.film-cards');
 import { paginationPlace } from './movie_search';
+
+{
+  /* <img
+  class="loader__img"
+  src="./images/logo_white.png"
+  alt="logo loader spinner"
+/>; */
+}
 
 export const displayGalleryLoader = () => {
   gallery.classList.add('film-cards--loader');

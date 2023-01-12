@@ -1,3 +1,5 @@
+import Notiflix, { Notify } from 'notiflix';
+const debounce = require('lodash.debounce');
 import { renderMovies, renderModalMovie } from './cards_rendering.js';
 import {
   pagination,
@@ -31,6 +33,7 @@ export const searchFetch = async (searchValue, searchPage = 1) => {
   const genreIds = await responseGenres.json();
   return { movies, genreIds };
 };
+
 const emptySearch = 'Enter any character!';
 const failedSearch =
   'Search result not successful. Enter the correct movie name or keywords and try again!';
@@ -47,6 +50,7 @@ const warningMarkup = message => {
 };
 
 export let searchAllPages = 1;
+
 export let findMovie;
 
 export const searchMovie = (
@@ -55,13 +59,6 @@ export const searchMovie = (
   searchPage = 1,
   arrowClicked = false
 ) => {
-  // const parsedName = searchValue.trim();
-  //   const reg = new RegExp('^[a-zA-Z s]*$');
-  // if (parsedName.length === 0) {
-  //   paginationPlace.innerHTML = '';
-  //   return warningMarkup(emptySearch);
-  // }
-
   searchFetch(searchValue, searchPage)
     .then(elem => {
       const searchPageNo = elem.movies.page;
@@ -76,19 +73,28 @@ export const searchMovie = (
         pagination(totalPages, searchPage, true);
       }
 
-      // if (totalResults === 0) {
-      //   input.value = '';
-      //   return warningMarkup(failedSearch);
-      // }
-      // if (totalResults < 20) {
-      //   paginationPlace.innerHTML = '';
-      // }
+      if (totalResults === 0) {
+        input.value = '';
+        hideGalleryLoader();
+        return Notiflix.Notify.failure(
+          'Sorry, there are no images matching your search query. Please try again.'
+        );
+      }
+      if (totalResults < 20) {
+        paginationPlace.innerHTML = '';
+        return Notiflix.Notify.success(
+          `Great! We are finding ${totalResults} movies for you! We have hope you have found what you looking for!`
+        );
+      }
       setTimeout(() => {
         hideGalleryLoader();
         renderMovies(0, movies, genresIds);
       }, 2000);
       clearFocus();
       selectBtn(paginationPlace.children, searchPageNo);
+      return Notiflix.Notify.success(
+        `Great! We are finding ${totalResults} movies for you! Maybe you will try to watch them all? If not, try use more specific keywords and begin your movie adventure!`
+      );
     })
     .catch(error => console.log(error));
 };
@@ -103,3 +109,38 @@ form.addEventListener('submit', event => {
   searchMovie(searchValue, 1);
 
 });
+
+//if (window.location.pathname !== '/library.html') {
+  ///form.addEventListener('submit', event => {
+    //event.preventDefault();
+    //pageNum = 1;
+    //searchValue = input.value;
+    //if (searchValue.length === 0) {
+     // paginationPlace.innerHTML = '';
+      //return Notiflix.Notify.info(
+       // 'Enter any character to search or choose one from popular movies!'
+      //);
+   // }
+    //searchBtnClicked = true;
+    //console.log('Szukamy: ', searchValue, allPages, searchAllPages);
+    //displayGalleryLoader();
+    //searchMovie(searchValue);
+    //searchAllPages = allPages;
+    //console.log(
+     // 'Wygenerowane: ',
+      //searchValue,
+      //allPages,
+      //searchAllPages,
+      //findMovie
+    //);
+    //console.log('czy kliknięty button search ', searchBtnClicked);
+  //});
+  //input.addEventListener(
+   // 'input',
+    //debounce(event => {
+      //searchMovie(event.target.value);
+      //searchAllPages = allPages;
+    //}, 1000)
+  //);
+//}
+
