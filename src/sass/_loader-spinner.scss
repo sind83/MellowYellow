@@ -22,9 +22,11 @@
 }
 
 .loader__icon {
-  width: 100%;
   fill: getColor('basic-color');
   z-index: 300;
+  position: absolute;
+  left: 32%;
+  top: 32%;
 }
 
 @keyframes pulse {

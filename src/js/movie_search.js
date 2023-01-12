@@ -67,16 +67,13 @@ export const searchMovie = (
       }
 
       if (totalResults === 0) {
-
         hideGalleryLoader();
         Notiflix.Notify.failure(
           'Sorry, there are no films matching your search query. Please try again.'
         );
         gallery.innerHTML = `<div class="result-not-found"><span class="result-not-found__title">"${input.value}"</span>
-        <p class = "result-not-found__text"> UPS... We don't have this title  ...try something diferent</p>
-        <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO TO MAIN PAGE</div></a></div>`;
-
-
+        <p class = "result-not-found__text"> UPS... We don't have this title  ...try something different</p>
+        <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO TO HOMEPAGE</div></a></div>`;
       } else {
         displayGalleryLoader();
 
@@ -87,7 +84,7 @@ export const searchMovie = (
           if (totalResults > 1) {
             if (searchBtnClicked) {
               Notiflix.Notify.success(
-                `Great! We are finding ${totalResults} movies for you! We have hope you have found what you looking for!`
+                `Great! We are finding ${totalResults} movies for you! We hope you find what you are looking for!`
               );
             }
           }
@@ -95,18 +92,15 @@ export const searchMovie = (
         clearFocus();
         selectBtn(paginationPlace.children, searchPageNo);
       }
-
     })
     .catch(error => console.log(error));
 };
-
-
 
 if (window.location.pathname !== 'library.html') {
   form.addEventListener('submit', event => {
     event.preventDefault();
 
-    readMovie()
+    readMovie();
   });
   input.addEventListener(
     'input',
@@ -117,7 +111,7 @@ if (window.location.pathname !== 'library.html') {
         <p class = "result-not-found__text"> UPS... Enter any character to search some movie</p>
         <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO TO MAIN PAGE</div></a></div>`;
       } else {
-        readMovie()
+        readMovie();
       }
     }, 750)
   );
@@ -134,9 +128,10 @@ const readMovie = () => {
   searchValue = input.value;
   if (searchValue.length === 0) {
     paginationPlace.innerHTML = '';
-    Notiflix.Notify.info('Enter any character to search or choose one from popular movies!'
+    Notiflix.Notify.info(
+      'Enter any character to search or choose one from popular movies!'
     );
   }
   displayGalleryLoader();
   searchMovie(searchValue);
-}
+};
