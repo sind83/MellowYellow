@@ -102,7 +102,7 @@ export const searchMovie = (
 
 
 
-if (window.location.pathname !== 'library.html') {
+if (form != null) {
   form.addEventListener('submit', event => {
     event.preventDefault();
 
