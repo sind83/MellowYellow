@@ -210,12 +210,14 @@ border: 1px solid getColor('main-color');
         background-color: transparent;
         border: 1px solid getColor('main-color');
     }
-        @include tablet {
-            width: 125px;
-        }
-                @include desktop {
-                    width: 136px;
-                }
+
+    @include tablet {
+        width: 125px;
+    }
+    
+    @include desktop {
+        width: 136px;
+    }
 }
 .team-details__title{
 object-position: center;
