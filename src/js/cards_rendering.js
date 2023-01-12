@@ -61,7 +61,7 @@ export function renderMovies(page, results = [], genres) {
         if (release_date) {
           releaseYear = release_date.slice(0, 4);
         }
-        return `<div class='movie-card' data-movieId='${id}'>       
+        return `<div class='movie-card' data-movieid='${id}'>       
           <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${posterImage}' alt='${cuttedAlt}' data-movieId='${id}' loading='lazy' />
   <div class='movie-card__info'>
    <p class='info__title'>${homePageTitle}</p>
@@ -115,7 +115,7 @@ export function renderModalMovie({
     //  <button class='button button--inactive button--watched' type='button'>Add to watched</button>
     //  <button class='button button--inactive button--queue' type='button'>Add to queue</button>
     //       </div></div></div>`
-    `<div class="modal-container-film">
+    `<div class="modal-container-film" data-movieid='${id}'>
                 <img class="modal-img" src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy'/>
                 <div class="film-details">
                     <h2 class="film-details__main-title" >${title}</h2>
