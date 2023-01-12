@@ -8,6 +8,7 @@ import {
   clearFocus,
   selectBtn,
   timeInt,
+  pageActualNum,
 } from './pagination';
 import { API_KEY, GENRE_URL, API_URL } from './main_fetch.js';
 import { displayGalleryLoader, hideGalleryLoader } from './loader_spinner.js';
@@ -33,12 +34,28 @@ export const searchFetch = async (searchValue, searchPage = 1) => {
   return { movies, genreIds };
 };
 
-let allPages = 1;
-export let searchAllPages;
+const emptySearch = 'Enter any character!';
+const failedSearch =
+  'Search result not successful. Enter the correct movie name or keywords and try again!';
+const warningMarkup = message => {
+  const warning = document.createElement('p');
+  if (warning.classList.contains('warning')) {
+    warning.classList.remove('warning');
+    warning.textContent = '';
+  }
+  warning.classList.add('warning');
+  warning.textContent = message;
+  form.after(warning);
+  return warning;
+};
+
+export let searchAllPages = 1;
+
 export let findMovie;
 
 export const searchMovie = (
   searchValue,
+
   searchPage = 1,
   arrowClicked = false
 ) => {
@@ -48,14 +65,12 @@ export const searchMovie = (
       const movies = elem.movies.results;
       const totalPages = elem.movies.total_pages;
       const totalResults = elem.movies.total_results;
-      console.log(totalPages, totalResults);
-      allPages = totalPages;
-      console.log('From search: ', allPages, totalPages);
+      searchAllPages = totalPages;
       const genresIds = elem.genreIds.genres;
-      if (searchPageNo >= totalPages - 5) {
-        pagination(totalPages, searchPage - 5, false);
-      } else {
+      if (searchPage >= totalPages) {
         pagination(totalPages, searchPage, false);
+      } else {
+        pagination(totalPages, searchPage, true);
       }
 
       if (totalResults === 0) {
@@ -83,36 +98,49 @@ export const searchMovie = (
     })
     .catch(error => console.log(error));
 };
-if (window.location.pathname !== '/library.html') {
-  form.addEventListener('submit', event => {
-    event.preventDefault();
-    pageNum = 1;
-    searchValue = input.value;
-    if (searchValue.length === 0) {
-      paginationPlace.innerHTML = '';
-      return Notiflix.Notify.info(
-        'Enter any character to search or choose one from popular movies!'
-      );
-    }
-    searchBtnClicked = true;
-    console.log('Szukamy: ', searchValue, allPages, searchAllPages);
-    displayGalleryLoader();
-    searchMovie(searchValue);
-    searchAllPages = allPages;
-    console.log(
-      'Wygenerowane: ',
-      searchValue,
-      allPages,
-      searchAllPages,
-      findMovie
-    );
-    console.log('czy kliknięty button search ', searchBtnClicked);
-  });
-  input.addEventListener(
-    'input',
-    debounce(event => {
-      searchMovie(event.target.value);
-      searchAllPages = allPages;
-    }, 1000)
-  );
-}
+
+form.addEventListener('submit', event => {
+  searchAllPages = 1;
+  event.preventDefault();
+  pageNum = 1;
+  searchValue = input.value;
+  searchBtnClicked = true;
+  displayGalleryLoader();
+  searchMovie(searchValue, 1);
+
+});
+
+//if (window.location.pathname !== '/library.html') {
+  ///form.addEventListener('submit', event => {
+    //event.preventDefault();
+    //pageNum = 1;
+    //searchValue = input.value;
+    //if (searchValue.length === 0) {
+     // paginationPlace.innerHTML = '';
+      //return Notiflix.Notify.info(
+       // 'Enter any character to search or choose one from popular movies!'
+      //);
+   // }
+    //searchBtnClicked = true;
+    //console.log('Szukamy: ', searchValue, allPages, searchAllPages);
+    //displayGalleryLoader();
+    //searchMovie(searchValue);
+    //searchAllPages = allPages;
+    //console.log(
+     // 'Wygenerowane: ',
+      //searchValue,
+      //allPages,
+      //searchAllPages,
+      //findMovie
+    //);
+    //console.log('czy kliknięty button search ', searchBtnClicked);
+  //});
+  //input.addEventListener(
+   // 'input',
+    //debounce(event => {
+      //searchMovie(event.target.value);
+      //searchAllPages = allPages;
+    //}, 1000)
+  //);
+//}
+
