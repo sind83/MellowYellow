@@ -153,6 +153,9 @@ export const clearFocus = () => {
     })
 }
 
+export const loadMainPage=() => {
+    page(popularMovies, allPages, true);
+}
 
 export const page = (fetchFunc, pageNo = 1, renderOk = true, arrowClicked = false, searchVal = '') => {
     fetchFunc(pageNo, searchVal)
