@@ -211,7 +211,9 @@ border: 1px solid getColor('main-color');
         border: 1px solid getColor('main-color');
     }
 }
-
+.team-details__title{
+object-position: center;
+}
 .team-details__list {
     list-style: none;
     display: flex;
@@ -224,6 +226,7 @@ border: 1px solid getColor('main-color');
 .team_img {
     width: 200px;
     height: auto;
+    border-radius: 5px;
 }
 .team-details__name {
     font-size: 16px;
