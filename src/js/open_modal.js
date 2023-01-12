@@ -38,7 +38,7 @@ function openModal(e) {
     if (e.target?.closest('span')?.classList.contains('team-link')) {
       refs.backdropModal.classList.remove('is-hidden');
       // document.addEventListener('keydown', checkModalKey);
-      modalTeam();
+      // modalTeam();
     }
     
   }
