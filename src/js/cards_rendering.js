@@ -1,4 +1,5 @@
 import { popularMovies } from './main_fetch';
+import { hideModalLoader } from './loader_spinner';
 
 export const gallery = document.querySelector('.film-cards');
 
@@ -14,10 +15,14 @@ export function renderMovies(page, results = [], genres) {
           genresNames.push(genresId.indexOf(id));
           return genresNames;
         });
-        const namesOfGenre = genresNames
-          .map(idik => genreNames[idik])
-          .slice(0, 3)
-          .join(', ');
+        let namesOfGenre = 'unknown';
+        if (genre_ids) {
+          namesOfGenre = genresNames
+            .map(idik => genreNames[idik])
+            .slice(0, 3)
+            .join(', ');
+        }
+
         //funkcja Marty
         // const genresArray = {};
         // genres.forEach(genre => {
@@ -45,13 +50,19 @@ export function renderMovies(page, results = [], genres) {
         //     });
         const dots = '...';
         const cuttedTitle = title.slice(0, 35) + dots;
+        const cuttedAlt = title.slice(0, 15);
         const homePageTitle = title.length >= 40 ? cuttedTitle : title;
+
+        let posterImage = `wmyYQbahIy4SF2Qo6qNBBkJFg7z.jpg`;
+        if (poster_path) {
+          posterImage = poster_path;
+        }
         let releaseYear = 'unknown';
         if (release_date) {
           releaseYear = release_date.slice(0, 4);
         }
-        return `<div class='movie-card' data-movieId='${id}'>       
-          <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' data-movieId='${id}' loading='lazy' />
+        return `<div class='movie-card' data-movieid='${id}'>       
+          <img class='movie-card__image' src='https://image.tmdb.org/t/p/w500/${posterImage}' alt='${cuttedAlt}' data-movieId='${id}' loading='lazy' />
   <div class='movie-card__info'>
    <p class='info__title'>${homePageTitle}</p>
    <p class='info__adds'>${namesOfGenre} | ${releaseYear}</p>
@@ -78,6 +89,11 @@ export function renderModalMovie({
     .map(genre => genre.name)
     .slice(0, 3)
     .join(', ');
+
+  let posterImage = `wmyYQbahIy4SF2Qo6qNBBkJFg7z.jpg`;
+  if (poster_path) {
+    posterImage = poster_path;
+  }
   const markup =
     //   `<div class='movie-card movie-card--modal' data-movieId='${id}'>
     //         <img class='movie-card__image--modal' src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy' />
@@ -99,10 +115,10 @@ export function renderModalMovie({
     //  <button class='button button--inactive button--watched' type='button'>Add to watched</button>
     //  <button class='button button--inactive button--queue' type='button'>Add to queue</button>
     //       </div></div></div>`
-    `<div class="modal-container-film">
+    `<div class="modal-container-film" data-movieid='${id}'>
                 <img class="modal-img" src='https://image.tmdb.org/t/p/w500/${poster_path}' alt='${title}' loading='lazy'/>
                 <div class="film-details">
-                    <h2 class="film-details__main-title">${title}</h2>
+                    <h2 class="film-details__main-title" >${title}</h2>
                     <ul class="details-list list">
                         <li class="details-list__item">
                             <p class="details-list_title">Vote / Votes</p>
@@ -132,7 +148,7 @@ export function renderModalMovie({
     </div>
                 </div>
             </div>`;
-
+  hideModalLoader();
   const modalContent = document.querySelector('.modal-content');
-  modalContent.insertAdjacentHTML('afterbegin', markup);
+  modalContent.innerHTML = markup;
 }

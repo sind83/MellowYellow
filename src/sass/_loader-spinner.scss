@@ -20,8 +20,10 @@
   transform: translate(-50%, -50%);
   animation: pulse 1s ease-out infinite;
 }
-.loader__img {
+
+.loader__icon {
   width: 100%;
+  fill: getColor('basic-color');
 }
 
 @keyframes pulse {
