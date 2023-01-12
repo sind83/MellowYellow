@@ -216,6 +216,10 @@ border: 1px solid getColor('main-color');
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.team-details__item {
+    margin: 10px;
 }
 .team_img {
     width: 200px;
