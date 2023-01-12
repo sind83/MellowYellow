@@ -5,9 +5,9 @@ export function modalTeam() {
     <ul class="team-details__list list">
       <li class="team-details__item">
         <figure>
-          <img class="team_img" src="./images/malgorzata.jpg" loading="lazy" />
+          <img class="team_img" src="./images/szymon.jpg" loading="lazy" />
           <figcaption>
-            <h3 class="team-details__name">Małgorzata Marczyńska</h3>
+            <h3 class="team-details__name">Szymon Dymański</h3>
             <p class="team-details_role">Team Lider / Developer</p>
           </figcaption>
         </figure>
@@ -23,10 +23,10 @@ export function modalTeam() {
       </li>
       <li class="team-details__item">
         <figure>
-          <img class="team_img" src="./images/szymon.jpg" loading="lazy" />
+          <img class="team_img" src="./images/malgorzata.jpg" loading="lazy" />
           <figcaption>
-            <h3 class="team-details__name">Szymon Dymański</h3>
-            <p class="team-details_role">GitHub Specialist / Developer</p>
+            <h3 class="team-details__name">Małgorzata Marczyńska</h3>
+            <p class="team-details_role">Grey Goose / Developer</p>
           </figcaption>
         </figure>
       </li>
