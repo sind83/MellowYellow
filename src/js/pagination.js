@@ -4,24 +4,27 @@ import { popularMovies } from './main_fetch';
 import { searchBtnClicked, searchMovie, searchValue, searchFetch, searchAllPages } from './movie_search.js';
 
 export const paginationPlace = document.querySelector('.film-cards__pagination');
-const form = document.querySelector('.search-form');
+
+const forms = document.querySelector('.search-form');
 
 const dots = `...`;
 
 
-export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) => {
+export const pagination = (total_pages = 0, pageNo = 1, arrowClicked = false) => {
     paginationPlace.innerHTML = '';
-    if ((total_pages >= 1)) {
+    console.log("Total pages: ", total_pages)
+    if ((total_pages >= 2)) {
         if (pageNo > 1) {
             paginationPlace.innerHTML += `<div value="arrow_l" class="pagination__arrow left pagination__button"></div>`;
 
-            if (pageNo > 3) {
+            if ((pageNo > 3) && (total_pages > 5)) {
                 paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`;
             }
         }
-        if ((total_pages <= 5) && (total_pages >= 1)) {
+        if ((total_pages <= 5) && (total_pages >= 2)) {
+            paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`;
             for (let i = 0; i < total_pages - 1; i++) {
-                paginationPlace.innerHTML += `<div value="page" class="pagination__number pagination__button">${i + 1}</div>`
+                paginationPlace.innerHTML += `<div value="page" class="pagination__number pagination__button">${i + 2}</div>`
             }
         }
         else {
@@ -86,6 +89,7 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
                         paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i - 4}</div>`
                     }
                     else {
+                        console.log("Czyżby to");
                         paginationPlace.innerHTML += `<div value="page" class="pagination__button">${i}</div>`
                     }
                     if (i == 4 + initI) {
@@ -97,15 +101,24 @@ export const pagination = (total_pages = 1, pageNo = 1, arrowClicked = false) =>
 
             }
         }
-        if (pageNo < total_pages - 2) {
-            paginationPlace.innerHTML += `<div value="page" class="pagination__button">${total_pages}</div>`;
+        if ((total_pages <= 5) && (total_pages >= 2)) {
+
+            if (pageNo < total_pages) {
+                paginationPlace.innerHTML += `<div value="arrow_r" class = "pagination__arrow right pagination__button"></div>`
+            }
         }
-        if (pageNo < total_pages) {
-            paginationPlace.innerHTML += `<div value="arrow_r" class = "pagination__arrow right pagination__button"></div>`
+        else {
+            if (pageNo < total_pages - 2) {
+                paginationPlace.innerHTML += `<div value="page" class="pagination__button">${total_pages}</div>`;
+            }
+            if (pageNo < total_pages) {
+                paginationPlace.innerHTML += `<div value="arrow_r" class = "pagination__arrow right pagination__button"></div>`
+            }
         }
     }
 
-    if (total_pages == 1) {
+     if (total_pages == 1)
+     {
         paginationPlace.innerHTML += `<div value="page" class="pagination__button">${1}</div>`
     }
 }
@@ -312,8 +325,10 @@ paginationPlace.addEventListener("click", ev => {
         paginationRender(ev, page, popularMovies, allPages);
     }
 })
+//console.log(" UPS", document.body.hasChildNodes)
 
 
-form.addEventListener("click", ev => {
+forms.addEventListener("click", ev => {
     pageActualNum = 1;
 })
+

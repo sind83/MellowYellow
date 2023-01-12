@@ -11,6 +11,7 @@ const moviesContainer = document.querySelector('.film-cards');
 // Local storage
 const watchedMovies = [JSON.parse(localStorage.getItem('movies-watched'))];
 const queuedMovies = [JSON.parse(localStorage.getItem('movies-queued'))];
+console.log(watchedMovies, queuedMovies)
 
 export function loadLibrary() {
   loadWatchedList;

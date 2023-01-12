@@ -6,7 +6,7 @@ export async function fetchLibrary(ids) {
   let watchedMoviesURL = [];
   // finding movie
   for (const movieId of ids) {
-    watchedMoviesURL.push(api_url + `${movieId.id}?api_key=${api_key}`);
+    watchedMoviesURL.push(api_url+`${movieId.id}?api_key=${api_key}`);
   }
   console.log('Movies in this library (URL): ', watchedMoviesURL);
   const movies = [];

@@ -1,15 +1,8 @@
 import Notiflix, { Notify } from 'notiflix';
 const debounce = require('lodash.debounce');
 import { renderMovies, renderModalMovie } from './cards_rendering.js';
-import {
-  pagination,
-  page,
-  popularMovies,
-  clearFocus,
-  selectBtn,
-  timeInt,
-  pageActualNum,
-} from './pagination';
+import { pagination, clearFocus, selectBtn } from './pagination';
+
 import { API_KEY, GENRE_URL, API_URL } from './main_fetch.js';
 import { displayGalleryLoader, hideGalleryLoader } from './loader_spinner.js';
 
@@ -49,7 +42,7 @@ const warningMarkup = message => {
   return warning;
 };
 
-export let searchAllPages = 1;
+export let searchAllPages = 0;
 
 export let findMovie;
 
@@ -74,73 +67,67 @@ export const searchMovie = (
       }
 
       if (totalResults === 0) {
+        
+        hideGalleryLoader();
+        Notiflix.Notify.failure(
+          'Sorry, there are no films matching your search query. Please try again.'
+        );
+        gallery.innerHTML = `<div class="result-not-found"><span class="result-not-found__title">${input.value}</span>
+        <p class = "result-not-found__text"> UPS... We don't have this tiitle  ...try something diferent</p></div>`;
         input.value = '';
-        hideGalleryLoader();
-        return Notiflix.Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.'
-        );
+      } else {
+
+        setTimeout(() => {
+          hideGalleryLoader();
+          renderMovies(0, movies, genresIds);
+          if (totalResults > 1) {
+            Notiflix.Notify.success(
+              `Great! We are finding ${totalResults} movies for you! We have hope you have found what you looking for!`
+            );
+          }
+        }, 2000);
+        clearFocus();
+        selectBtn(paginationPlace.children, searchPageNo);
       }
-      if (totalResults < 20) {
-        paginationPlace.innerHTML = '';
-        return Notiflix.Notify.success(
-          `Great! We are finding ${totalResults} movies for you! We have hope you have found what you looking for!`
-        );
-      }
-      setTimeout(() => {
-        hideGalleryLoader();
-        renderMovies(0, movies, genresIds);
-      }, 2000);
-      clearFocus();
-      selectBtn(paginationPlace.children, searchPageNo);
-      return Notiflix.Notify.success(
-        `Great! We are finding ${totalResults} movies for you! Maybe you will try to watch them all? If not, try use more specific keywords and begin your movie adventure!`
-      );
+      // return Notiflix.Notify.success(
+      //   `Great! We are finding ${totalResults} movies for you! Maybe you will try to watch them all? If not, try use more specific keywords and begin your movie adventure!`
+      // );
     })
     .catch(error => console.log(error));
 };
 
-form.addEventListener('submit', event => {
-  searchAllPages = 1;
-  event.preventDefault();
-  pageNum = 1;
-  searchValue = input.value;
-  searchBtnClicked = true;
-  displayGalleryLoader();
-  searchMovie(searchValue, 1);
+// form.addEventListener('submit', event => {
+//   searchAllPages = 1;
+//   event.preventDefault();
+//   pageNum = 1;
+//   searchValue = input.value;
+//   searchBtnClicked = true;
+//   displayGalleryLoader();
+//   searchMovie(searchValue, 1);
 
-});
+// });
 
-// if (window.location.pathname !== './library.html') {
-//   form.addEventListener('submit', event => {
-//     event.preventDefault();
-//     pageNum = 1;
-//     searchValue = input.value;
-//     if (searchValue.length === 0) {
-//       paginationPlace.innerHTML = '';
-//       return Notiflix.Notify.info(
-//         'Enter any character to search or choose one from popular movies!'
-//       );
-//     }
-//     searchBtnClicked = true;
-//     console.log('Szukamy: ', searchValue, allPages, searchAllPages);
-//     displayGalleryLoader();
-//     searchMovie(searchValue);
-//     searchAllPages = allPages;
-//     console.log(
-//       'Wygenerowane: ',
-//       searchValue,
-//       allPages,
-//       searchAllPages,
-//       findMovie
-//     );
-//     console.log('czy kliknięty button search ', searchBtnClicked);
-//   });
-//   input.addEventListener(
-//     'input',
-//     debounce(event => {
-//       searchMovie(event.target.value);
-//       searchAllPages = allPages;
-//     }, 1000)
-//   );
-// }
+if (window.location.pathname !== 'library.html') {
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    pageNum = 1;
+    searchValue = input.value;
+    if (searchValue.length === 0) {
+      paginationPlace.innerHTML = '';
+     Notiflix.Notify.info('Enter any character to search or choose one from popular movies!'
+      );
+    }
+    searchBtnClicked = true;
+    console.log('Szukamy: ', searchValue, searchAllPages);
+    displayGalleryLoader();
+    searchMovie(searchValue);
+  });
+  input.addEventListener(
+    'input',
+    debounce(event => {
+      searchMovie(event.target.value);
+
+    }, 250)
+  );
+}
 
