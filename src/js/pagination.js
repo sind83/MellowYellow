@@ -330,8 +330,8 @@ paginationPlace.addEventListener("click", ev => {
 })
 //console.log(" UPS", document.body.hasChildNodes)
 
-
-forms.addEventListener("click", ev => {
-    pageActualNum = 1;
-})
-
+if(forms !=null){
+    forms.addEventListener("click", ev => {
+        pageActualNum = 1;
+    })
+}
