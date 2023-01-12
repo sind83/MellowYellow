@@ -119,3 +119,40 @@
     }
   }
 }
+.result-not-found{
+
+  width: 100%;
+  display: block;
+  text-align: center;
+  justify-content: center;
+  &__text{
+    font-size: 28px;
+    padding-top: 30px;
+  }
+  &__title{
+    font-size: 45px;
+    margin-bottom: 50px;
+    text-transform:uppercase;
+  }
+  &__button{
+    margin: auto;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 180px;
+    margin-top:80px;
+    font-size: 18px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: getColor("second-main");
+    color: getColor('main-color');
+    transition-property: box-shadow;
+      transition-duration: 250ms;
+    &:hover{
+       box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.75);
+    }
+    }
+    &__link{
+      text-decoration: none;
+    }
+  
+}
