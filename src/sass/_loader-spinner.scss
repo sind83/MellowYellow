@@ -21,13 +21,17 @@
   animation: pulse 1s ease-out infinite;
 }
 
-.loader__icon {
-  fill: getColor('basic-color');
-  z-index: 300;
-  position: absolute;
-  left: 32%;
-  top: 32%;
+.loader__img {
+  width: 100%;
 }
+
+// .loader__icon {
+//   fill: getColor('basic-color');
+//   z-index: 300;
+//   position: absolute;
+//   left: 32%;
+//   top: 32%;
+// }
 
 @keyframes pulse {
   0% {
