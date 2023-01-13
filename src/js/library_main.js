@@ -32,7 +32,7 @@ async function loadWatchedList() {
 
   // change showed movies
   moviesContainer.innerHTML = '';
-  if (watchedMovies == null || watchedMovies.length == 0) {
+  if (watchedMovies[0] == null || watchedMovies.length == 0) {
     moviesContainer.innerHTML = `<h2>You don't have any watched movies yet!</h2>`;
     return;
   } else {
@@ -51,7 +51,7 @@ async function loadQueueList() {
 
   // change showed movies
   moviesContainer.innerHTML = '';
-  if (queuedMovies == null || queuedMovies.length == 0) {
+  if (queuedMovies[0] == null || queuedMovies.length == 0) {
     moviesContainer.innerHTML = `<h2>You don't have any queued movies yet!</h2>`;
     // return;
   } else {
