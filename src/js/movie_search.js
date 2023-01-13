@@ -1,4 +1,5 @@
 import Notiflix, { Notify } from 'notiflix';
+
 const debounce = require('lodash.debounce');
 import { renderMovies, renderModalMovie } from './cards_rendering.js';
 import { pagination, clearFocus, selectBtn, loadMainPage } from './pagination';
@@ -67,16 +68,13 @@ export const searchMovie = (
       }
 
       if (totalResults === 0) {
-
         hideGalleryLoader();
         Notiflix.Notify.failure(
           'Sorry, there are no films matching your search query. Please try again.'
         );
         gallery.innerHTML = `<div class="result-not-found"><span class="result-not-found__title">"${input.value}"</span>
-        <p class = "result-not-found__text"> UPS... We don't have this title  ...try something diferent</p>
-        <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO TO MAIN PAGE</div></a></div>`;
-
-
+        <p class = "result-not-found__text"> UPS... We don't have this title  ...try something different</p>
+        <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO BACK TO HOMEPAGE</div></a></div>`;
       } else {
         displayGalleryLoader();
 
@@ -87,7 +85,7 @@ export const searchMovie = (
           if (totalResults > 1) {
             if (searchBtnClicked) {
               Notiflix.Notify.success(
-                `Great! We are finding ${totalResults} movies for you! We have hope you have found what you looking for!`
+                `Great! We found ${totalResults} movies for you! We hope you find what you are looking for!`
               );
             }
           }
@@ -95,18 +93,16 @@ export const searchMovie = (
         clearFocus();
         selectBtn(paginationPlace.children, searchPageNo);
       }
-
     })
     .catch(error => console.log(error));
 };
 
-
-
 if (form != null) {
+
   form.addEventListener('submit', event => {
     event.preventDefault();
 
-    readMovie()
+    readMovie();
   });
   input.addEventListener(
     'input',
@@ -114,16 +110,16 @@ if (form != null) {
       searchBtnClicked = false;
       if (input.value == '') {
         gallery.innerHTML = `<div class="result-not-found">
-        <p class = "result-not-found__text"> UPS... Enter any character to search some movie</p>
+        <p class = "result-not-found__text"> UPS... Enter any character to search for some movie</p>
         <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO TO MAIN PAGE</div></a></div>`;
       } else {
-        readMovie()
+        readMovie();
       }
     }, 750)
   );
   if (input.value == '') {
     gallery.innerHTML = `<div class="result-not-found">
-        <p class = "result-not-found__text"> UPS... Enter any character to search some movie</p>
+        <p class = "result-not-found__text"> UPS... Enter any character to search for some movie</p>
         <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO TO MAIN PAGE</div></a></div>`;
   }
 }
@@ -134,9 +130,24 @@ const readMovie = () => {
   searchValue = input.value;
   if (searchValue.length === 0) {
     paginationPlace.innerHTML = '';
-    Notiflix.Notify.info('Enter any character to search or choose one from popular movies!'
+    Notiflix.Notify.info(
+      'Enter any character to search or choose one from popular movies!'
     );
   }
   displayGalleryLoader();
   searchMovie(searchValue);
-}
+};
+
+Notiflix.Notify.init({
+  position: 'right-top', // 'right-top' - 'right-bottom' - 'left-top' - 'left-bottom' - 'center-top' - 'center-bottom' - 'center-center'
+  timeout: 4000,
+  showOnlyTheLastOne: true,
+
+  fontFamily: 'Roboto',
+  fontSize: '13px',
+
+  success: {
+    background: '#ff6b01',
+    textColor: '#fff',
+  },
+});

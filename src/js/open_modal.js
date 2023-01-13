@@ -4,6 +4,8 @@ import { modalTeam } from './modal_team';
 
 import { API_KEY, GENRE_URL, API_URL } from './main_fetch.js';
 
+import { displayModalLoader } from './loader_spinner';
+
 const MOVIE_URL = `https://api.themoviedb.org/3/movie/`;
 const refs = {
   body: document.querySelector('body'),
@@ -24,18 +26,17 @@ function openModal(e) {
   const id = e.target.getAttribute('data-movieId');
   if (e.target?.closest('svg')?.classList.contains('modal-close')) {
     closeModal();
-  }
-  
-  
-
-  else {
+  } else {
     document.addEventListener('keydown', checkModalKey);
 
     if (e.target?.closest('div')?.classList.contains('movie-card')) {
       refs.backdropModal.classList.remove('is-hidden');
       // document.addEventListener('keydown', checkModalKey);
+      displayModalLoader();
       oneMovieFetch(id).then(elem => {
-        renderModalMovie(elem);
+        setTimeout(() => {
+          renderModalMovie(elem);
+        }, 1000);
       });
     }
     if (e.target?.closest('span')?.classList.contains('team-link')) {
@@ -43,8 +44,6 @@ function openModal(e) {
       // document.addEventListener('keydown', checkModalKey);
       modalTeam();
     }
-    
-
   }
 }
 

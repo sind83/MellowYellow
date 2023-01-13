@@ -12,11 +12,18 @@ ul {
   padding: 0;
 }
 
-.body {
+body {
   margin: 0 auto;
   font-family: getFont('main-font'), sans-serif;
   color: getColor('main-color');
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+main {
+  flex-grow: 1;
 }
 
 .container {
