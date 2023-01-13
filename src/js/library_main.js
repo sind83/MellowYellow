@@ -1,6 +1,6 @@
 import { fetchLibrary } from './library_fetch';
 import { paginationPlace } from './pagination';
-import { modalTeam } from './modal_team';
+import { gallery } from './cards_rendering';
 
 
 // DOM elements
@@ -12,13 +12,22 @@ const queueListButton = document.querySelector('[loadQueued]');
 const moviesContainer = document.querySelector('.film-cards');
 
 // Local storage
-const watchedMovies = [JSON.parse(localStorage.getItem('movies-watched'))];
-const queuedMovies = [JSON.parse(localStorage.getItem('movies-queued'))];
-console.log(watchedMovies, queuedMovies)
-
+let watchedMovies = [JSON.parse(localStorage.getItem('movies-watched'))];
+let queuedMovies = [JSON.parse(localStorage.getItem('movies-queued'))];
+// console.log(watchedMovies, queuedMovies)
+gallery.innerHTML = "";
 paginationPlace.innerHTML = '';
 
+setTimeout(() => {
+  
+  loadLibrary();
+  loadWatchedList();
+}, 1000)
+
+
 export function loadLibrary() {
+  gallery.innerHTML = "";
+  paginationPlace.innerHTML = '';
   loadWatchedList();
 }
 
@@ -26,17 +35,19 @@ async function loadWatchedList() {
   // button's visual changes
   watchedListButton.classList.add('button--active');
   watchedListButton.classList.remove('button--inactive');
-
+  paginationPlace.innerHTML = '';
   queueListButton.classList.add('button--inactive');
   queueListButton.classList.remove('button--active');
 
   // change showed movies
-  moviesContainer.innerHTML = '';
+
   if (watchedMovies[0] == null || watchedMovies.length == 0) {
+    paginationPlace.innerHTML = '';
     moviesContainer.innerHTML = `<h2>You don't have any watched movies yet!</h2>`;
     return;
   } else {
-    console.log(watchedMovies);
+    paginationPlace.innerHTML = '';
+    // console.log(watchedMovies);
 
     fetchLibrary(watchedMovies[0]);
   }
@@ -55,14 +66,17 @@ async function loadQueueList() {
     moviesContainer.innerHTML = `<h2>You don't have any queued movies yet!</h2>`;
     // return;
   } else {
-    console.log(queuedMovies[0]);
+    // console.log(queuedMovies[0]);
     fetchLibrary(queuedMovies[0]);
   }
 }
 
+// loadLibrary();
+// loadWatchedList();
 
-myLibraryButton.addEventListener('click',loadLibrary);
+
+myLibraryButton.addEventListener('click', loadLibrary);
 
 watchedListButton.addEventListener('click', loadWatchedList);
 queueListButton.addEventListener('click', loadQueueList);
-loadWatchedList();
+
