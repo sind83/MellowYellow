@@ -1,4 +1,5 @@
 import Notiflix, { Notify } from 'notiflix';
+
 const debounce = require('lodash.debounce');
 import { renderMovies, renderModalMovie } from './cards_rendering.js';
 import { pagination, clearFocus, selectBtn, loadMainPage } from './pagination';
@@ -135,3 +136,17 @@ const readMovie = () => {
   displayGalleryLoader();
   searchMovie(searchValue);
 };
+
+Notiflix.Notify.init({
+  position: 'right-top', // 'right-top' - 'right-bottom' - 'left-top' - 'left-bottom' - 'center-top' - 'center-bottom' - 'center-center'
+  timeout: 4000,
+  showOnlyTheLastOne: true,
+
+  fontFamily: 'Roboto',
+  fontSize: '13px',
+
+  success: {
+    background: '#ff6b01',
+    textColor: '#fff',
+  },
+});
