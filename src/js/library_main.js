@@ -49,7 +49,7 @@ async function loadQueueList() {
   moviesContainer.innerHTML = '';
   if (queuedMovies == null || queuedMovies.length == 0) {
     moviesContainer.innerHTML = `<h2>You don't have any queued movies yet!</h2>`;
-    return;
+    // return;
   } else {
     console.log(queuedMovies[0]);
     fetchLibrary(queuedMovies[0]);
