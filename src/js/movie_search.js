@@ -84,7 +84,7 @@ export const searchMovie = (
           if (totalResults > 1) {
             if (searchBtnClicked) {
               Notiflix.Notify.success(
-                `Great! We are finding ${totalResults} movies for you! We hope you find what you are looking for!`
+                `Great! We found ${totalResults} movies for you! We hope you find what you are looking for!`
               );
             }
           }
@@ -117,7 +117,7 @@ if (window.location.pathname !== 'library.html') {
   );
   if (input.value == '') {
     gallery.innerHTML = `<div class="result-not-found">
-        <p class = "result-not-found__text"> UPS... Enter any character to search some movie</p>
+        <p class = "result-not-found__text"> UPS... Enter any character to search for some movie</p>
         <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO TO MAIN PAGE</div></a></div>`;
   }
 }
