@@ -8,7 +8,7 @@ export const paginationPlace = document.querySelector('.film-cards__pagination')
 const forms = document.querySelector('.search-form');
 
 const dots = `...`;
-
+let arrowClicked;
 
 export const pagination = (total_pages = 0, pageNo = 1, arrowClicked = false) => {
     paginationPlace.innerHTML = '';
@@ -188,6 +188,7 @@ export const page = (fetchFunc, pageNo = 1, renderOk = true, arrowClicked = fals
         .catch(console.warn);
 }
 page(popularMovies, allPages, true);
+
 
 export const paginationRender = (ev, mainCallback, fetchCallback, pages) => {
     //ev - event, mainCallback-function doing read, fetchcallback - func geting fetch from url
