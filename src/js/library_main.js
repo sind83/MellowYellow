@@ -1,5 +1,6 @@
 import { fetchLibrary } from './library_fetch';
 import { paginationPlace } from './pagination';
+import { modalTeam } from './modal_team';
 
 
 // DOM elements
