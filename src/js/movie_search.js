@@ -69,9 +69,9 @@ export const searchMovie = (
 
       if (totalResults === 0) {
         hideGalleryLoader();
-        Notiflix.Notify.failure(
-          'Sorry, there are no films matching your search query. Please try again.'
-        );
+        // Notiflix.Notify.failure(
+        //   'Sorry, there are no films matching your search query. Please try again.'
+        // );
         gallery.innerHTML = `<div class="result-not-found"><span class="result-not-found__title">"${input.value}"</span>
         <p class = "result-not-found__text"> UPS... We don't have this title  ...try something different</p>
         <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO BACK TO HOMEPAGE</div></a></div>`;
@@ -102,7 +102,14 @@ if (form != null) {
   form.addEventListener('submit', event => {
     event.preventDefault();
 
-    readMovie();
+    if (input.value == '') {
+      gallery.innerHTML = `<div class="result-not-found">
+        <p class = "result-not-found__text"> UPS... Enter any character to search for some movie</p>
+        <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO TO HOMEPAGE</div></a></div>`;
+      paginationPlace.innerHTML = '';
+    } else {
+      readMovie();
+    }
   });
   input.addEventListener(
     'input',
@@ -111,7 +118,8 @@ if (form != null) {
       if (input.value == '') {
         gallery.innerHTML = `<div class="result-not-found">
         <p class = "result-not-found__text"> UPS... Enter any character to search for some movie</p>
-        <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO TO MAIN PAGE</div></a></div>`;
+        <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO TO HOMEPAGE</div></a></div>`;
+        paginationPlace.innerHTML = '';
       } else {
         readMovie();
       }
