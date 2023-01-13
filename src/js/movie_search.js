@@ -42,7 +42,7 @@ const warningMarkup = message => {
   form.after(warning);
   return warning;
 };
-
+let pageNum;
 export let searchAllPages = 0;
 
 export let findMovie;
