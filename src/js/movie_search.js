@@ -97,7 +97,8 @@ export const searchMovie = (
     .catch(error => console.log(error));
 };
 
-if (window.location.pathname !== 'library.html') {
+if (form != null) {
+
   form.addEventListener('submit', event => {
     event.preventDefault();
 

@@ -1,5 +1,6 @@
 import { fetchLibrary } from './library_fetch';
 
+
 // DOM elements
 const myLibraryButton = document.querySelector(
   '.navigation__item:nth-child(2)'
@@ -14,7 +15,7 @@ const queuedMovies = [JSON.parse(localStorage.getItem('movies-queued'))];
 console.log(watchedMovies, queuedMovies)
 
 export function loadLibrary() {
-  loadWatchedList;
+  loadWatchedList();
 }
 
 async function loadWatchedList() {
@@ -54,7 +55,9 @@ async function loadQueueList() {
     fetchLibrary(queuedMovies[0]);
   }
 }
-myLibraryButton.addEventListener('click', loadLibrary);
+
+
+myLibraryButton.addEventListener('click',loadLibrary());
 
 watchedListButton.addEventListener('click', loadWatchedList);
 queueListButton.addEventListener('click', loadQueueList);
