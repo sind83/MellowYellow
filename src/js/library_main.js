@@ -1,4 +1,5 @@
 import { fetchLibrary } from './library_fetch';
+import { paginationPlace } from './pagination';
 
 
 // DOM elements
@@ -13,6 +14,8 @@ const moviesContainer = document.querySelector('.film-cards');
 const watchedMovies = [JSON.parse(localStorage.getItem('movies-watched'))];
 const queuedMovies = [JSON.parse(localStorage.getItem('movies-queued'))];
 console.log(watchedMovies, queuedMovies)
+
+paginationPlace.innerHTML = '';
 
 export function loadLibrary() {
   loadWatchedList();
@@ -57,7 +60,8 @@ async function loadQueueList() {
 }
 
 
-myLibraryButton.addEventListener('click',loadLibrary());
+myLibraryButton.addEventListener('click',loadLibrary);
 
 watchedListButton.addEventListener('click', loadWatchedList);
 queueListButton.addEventListener('click', loadQueueList);
+loadWatchedList();
