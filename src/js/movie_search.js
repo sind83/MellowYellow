@@ -73,7 +73,7 @@ export const searchMovie = (
         );
         gallery.innerHTML = `<div class="result-not-found"><span class="result-not-found__title">"${input.value}"</span>
         <p class = "result-not-found__text"> UPS... We don't have this title  ...try something different</p>
-        <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO TO HOMEPAGE</div></a></div>`;
+        <a class = "result-not-found__link" href = "index.html"> <div class = "result-not-found__button">GO BACK TO HOMEPAGE</div></a></div>`;
       } else {
         displayGalleryLoader();
 
