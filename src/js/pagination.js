@@ -12,7 +12,7 @@ let arrowClicked;
 
 export const pagination = (total_pages = 0, pageNo = 1, arrowClicked = false) => {
     paginationPlace.innerHTML = '';
-    console.log("Total pages: ", total_pages)
+    // console.log("Total pages: ", total_pages)
     if ((total_pages >= 2)) {
         if (pageNo > 1) {
             paginationPlace.innerHTML += `<div value="arrow_l" class="pagination__arrow left pagination__button"></div>`;
